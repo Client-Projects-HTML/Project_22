@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express Bays | Apex Auto Care & Oil Change</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              charcoal: '#0b0d12',
+              cardDark: '#121620',
+              red: '#e52323',
+              redHover: '#cc1e1e'
+            }
+          },
+          fontFamily: {
+            serif: ['Oswald', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-brand-charcoal text-neutral-100 transition-colors duration-300 font-sans selection:bg-brand-red selection:text-white">
+
+  <!-- UNIFIED NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-neutral-800/80 bg-brand-charcoal/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-3 shrink-0 group">
+          <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
+            <i data-lucide="wrench" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-extrabold uppercase tracking-wider text-white leading-none">Apex Auto</span>
+            <span class="text-[9px] tracking-[0.25em] text-neutral-400 uppercase font-semibold mt-1">Care & Oil Change</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
+          <a href="index.html" class="text-neutral-300 hover:text-white transition-colors">Home</a>
+          <a href="services.html" class="text-neutral-300 hover:text-white transition-colors">Services</a>
+          <a href="express-bays.html" class="text-brand-red font-bold transition-colors">Express Bays</a>
+          <a href="pricing.html" class="text-neutral-300 hover:text-white transition-colors">Packages & Pricing</a>
+          <a href="gallery.html" class="text-neutral-300 hover:text-white transition-colors">Our Shop</a>
+          <a href="contact.html" class="text-neutral-300 hover:text-white transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Action Controls -->
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="login.html" class="px-4 py-2.5 text-xs uppercase font-bold tracking-wider border border-neutral-700 rounded-lg text-white hover:bg-neutral-800 transition-colors">
+            Sign In
+          </a>
+          <a href="booking.html" class="px-5 py-2.5 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-brand-redHover rounded-lg shadow-lg shadow-brand-red/25 transition-all">
+            Book Appointment
+          </a>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <button type="button" class="w-10 h-10 flex items-center justify-center border border-neutral-800 rounded-lg text-white">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 pt-20">
+
+    <!-- HERO HEADER -->
+    <section class="relative bg-brand-charcoal py-16 sm:py-24 text-center border-b border-neutral-800/60 overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(#e52323_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+      
+      <div class="relative z-10 max-w-4xl mx-auto px-4">
+        <span class="inline-block text-xs font-mono uppercase tracking-[0.2em] text-brand-red bg-brand-red/10 border border-brand-red/20 px-3.5 py-1 rounded-full mb-4">
+          <i data-lucide="zap" class="w-3.5 h-3.5 inline-block mr-1"></i> 15-Minute Drive-Thru Service
+        </span>
+        <h1 class="font-serif text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-white mb-4">
+          High-Speed Express Bays
+        </h1>
+        <p class="text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          No appointments needed. Drive right into our dedicated express lanes for rapid fluid exchanges, tire pressure checks, and digital safety inspections.
+        </p>
+      </div>
+    </section>
+
+    <!-- LIVE BAY STATUS TRACKER -->
+    <section class="py-12 bg-brand-cardDark/40 border-b border-neutral-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 bg-brand-cardDark border border-neutral-800 p-6 rounded-2xl">
+          <div class="flex items-center gap-4">
+            <div class="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
+            <div>
+              <h3 class="font-serif text-lg font-bold uppercase text-white">Live Bay Availability</h3>
+              <p class="text-xs text-neutral-400">Current average wait time: <span class="text-emerald-400 font-bold">~ 4 Minutes</span></p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full md:w-auto">
+            <div class="bg-neutral-900 border border-emerald-500/30 px-4 py-2.5 rounded-xl text-center">
+              <span class="text-[10px] font-mono uppercase text-emerald-400 block">Bay 01</span>
+              <span class="text-xs font-bold text-white uppercase">OPEN</span>
+            </div>
+            <div class="bg-neutral-900 border border-neutral-800 px-4 py-2.5 rounded-xl text-center">
+              <span class="text-[10px] font-mono uppercase text-brand-red block">Bay 02</span>
+              <span class="text-xs font-bold text-neutral-400 uppercase">IN USE (8m)</span>
+            </div>
+            <div class="bg-neutral-900 border border-emerald-500/30 px-4 py-2.5 rounded-xl text-center">
+              <span class="text-[10px] font-mono uppercase text-emerald-400 block">Bay 03</span>
+              <span class="text-xs font-bold text-white uppercase">OPEN</span>
+            </div>
+            <div class="bg-neutral-900 border border-neutral-800 px-4 py-2.5 rounded-xl text-center">
+              <span class="text-[10px] font-mono uppercase text-brand-red block">Bay 04</span>
+              <span class="text-xs font-bold text-neutral-400 uppercase">IN USE (3m)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPRESS BAY FEATURES GRID -->
+    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand-red">Engineered For Speed</span>
+        <h2 class="font-serif text-3xl font-extrabold uppercase text-white mt-1">What Makes Our Express Bays Different</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="bg-brand-cardDark border border-neutral-800 p-8 rounded-2xl relative group hover:border-brand-red/50 transition-all duration-300">
+          <div class="w-12 h-12 bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center rounded-xl mb-6">
+            <i data-lucide="gauge" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold uppercase text-white mb-3">Pit-Crew Efficiency</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Two certified technicians work simultaneously on your vehicle—one servicing under the hood, one managing underbody drainage.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-brand-cardDark border border-neutral-800 p-8 rounded-2xl relative group hover:border-brand-red/50 transition-all duration-300">
+          <div class="w-12 h-12 bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center rounded-xl mb-6">
+            <i data-lucide="droplet" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold uppercase text-white mb-3">Direct Fluid Dispensers</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Automated, computer-metered synthetic fluid lines ensure exact OEM fill capacity down to the exact milliliter without spillage.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-brand-cardDark border border-neutral-800 p-8 rounded-2xl relative group hover:border-brand-red/50 transition-all duration-300">
+          <div class="w-12 h-12 bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center rounded-xl mb-6">
+            <i data-lucide="smartphone" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold uppercase text-white mb-3">Digital Inspection Stream</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Receive instant photo and video updates of fluid levels, air filters, and battery health directly to your smartphone during service.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- IN-BAY PROCESS STEPS -->
+    <section class="py-16 bg-neutral-900/60 border-t border-neutral-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand-red">Express Protocol</span>
+          <h2 class="font-serif text-3xl font-extrabold uppercase text-white mt-1">Our 15-Minute In-Bay Workflow</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <div class="bg-brand-cardDark border border-neutral-800 p-6 rounded-2xl relative">
+            <span class="font-serif text-4xl font-extrabold text-neutral-800 absolute top-4 right-4">01</span>
+            <div class="text-brand-red font-bold text-xs uppercase tracking-wider mb-2">Minute 0 - 3</div>
+            <h4 class="font-serif text-lg font-bold uppercase text-white mb-2">Drive-In & Scan</h4>
+            <p class="text-xs text-neutral-400">License plate recognition pulls up vehicle service history while fluid drain begins.</p>
+          </div>
+
+          <div class="bg-brand-cardDark border border-neutral-800 p-6 rounded-2xl relative">
+            <span class="font-serif text-4xl font-extrabold text-neutral-800 absolute top-4 right-4">02</span>
+            <div class="text-brand-red font-bold text-xs uppercase tracking-wider mb-2">Minute 3 - 8</div>
+            <h4 class="font-serif text-lg font-bold uppercase text-white mb-2">Filter & Fill</h4>
+            <p class="text-xs text-neutral-400">Old filter replaced with OEM unit; fresh full-synthetic oil pumped via metered lines.</p>
+          </div>
+
+          <div class="bg-brand-cardDark border border-neutral-800 p-6 rounded-2xl relative">
+            <span class="font-serif text-4xl font-extrabold text-neutral-800 absolute top-4 right-4">03</span>
+            <div class="text-brand-red font-bold text-xs uppercase tracking-wider mb-2">Minute 8 - 12</div>
+            <h4 class="font-serif text-lg font-bold uppercase text-white mb-2">Multi-Point Check</h4>
+            <p class="text-xs text-neutral-400">Tire pressures adjusted, wiper fluids topped off, and battery life tested digitally.</p>
+          </div>
+
+          <div class="bg-brand-cardDark border border-neutral-800 p-6 rounded-2xl relative">
+            <span class="font-serif text-4xl font-extrabold text-neutral-800 absolute top-4 right-4">04</span>
+            <div class="text-brand-red font-bold text-xs uppercase tracking-wider mb-2">Minute 12 - 15</div>
+            <h4 class="font-serif text-lg font-bold uppercase text-white mb-2">Drive Away</h4>
+            <p class="text-xs text-neutral-400">Review digital report on phone, pay contactlessly, and head out with complete peace of mind.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-r from-brand-cardDark via-neutral-900 to-brand-cardDark border border-neutral-800 p-8 sm:p-12 rounded-3xl text-center relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <h2 class="font-serif text-3xl sm:text-4xl font-extrabold uppercase text-white mb-4">
+            Need an Express Oil Change Today?
+          </h2>
+          <p class="text-xs sm:text-sm text-neutral-400 mb-8">
+            No appointment necessary. Drive straight into our Express Bays during operating hours or lock in your spot online.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="booking.html" class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider bg-brand-red text-white hover:bg-brand-redHover rounded-xl shadow-lg shadow-brand-red/25 transition-all">
+              Reserve Express Lane
+            </a>
+            <a href="contact.html" class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider border border-neutral-700 text-white hover:bg-neutral-800 rounded-xl transition-colors">
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-neutral-400 border-t border-neutral-800 py-8 text-xs text-center">
+    <div class="max-w-7xl mx-auto px-4">
+      <p>&copy; 2026 Developed by Abhivorn Technologies Pvt. Ltd.
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

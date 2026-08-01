@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Premium | Apex Auto Care & Oil Change</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              charcoal: '#0b0d12',
+              cardDark: '#121620',
+              red: '#e52323',
+              redHover: '#cc1e1e'
+            }
+          },
+          fontFamily: {
+            serif: ['Oswald', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-brand-charcoal text-neutral-100 transition-colors duration-300 font-sans selection:bg-brand-red selection:text-white">
+
+  <!-- UNIFIED NAVBAR (EXACT MATCH TO MAIN HOME) -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-neutral-800/80 bg-brand-charcoal/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-3 shrink-0 group">
+          <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
+            <i data-lucide="wrench" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-extrabold uppercase tracking-wider text-white leading-none">Apex Auto</span>
+            <span class="text-[9px] tracking-[0.25em] text-neutral-400 uppercase font-semibold mt-1">Care & Oil Change</span>
+          </div>
+        </a>
+
+      
+          <!-- Desktop Links (ORDER FIXED: Home -> About Us -> Services) -->
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
+          
+          <!-- 1. Home Dropdown -->
+          <div class="relative group">
+            <button type="button" class="inline-flex items-center gap-1 text-brand-red py-2 focus:outline-none font-bold">
+              <span>Home</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-neutral-900 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <a href="index.html" class="block px-3 py-2 text-xs font-semibold rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 text-brand-red">Home (Classic)</a>
+              <a href="home-premium.html" class="block px-3 py-2 text-xs font-semibold rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300">Home (Premium)</a>
+            </div>
+          </div>
+
+          <!-- 2. About Us -->
+          <a href="about.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">About Us</a>
+
+          <!-- 3. Services -->
+          <a href="services.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Services</a>
+
+          <a href="pricing.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Packages & Pricing</a>
+          <a href="gallery.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Our Shop</a>
+          <a href="contact.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Contact</a>
+          <a href="dashboard.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors flex items-center gap-1 font-medium">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Admin
+          </a>
+        </nav>
+
+
+        <!-- Right Action Controls -->
+        <div class="hidden lg:flex items-center gap-3">
+          <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-800 bg-neutral-900/80 text-neutral-300 rounded-lg flex items-center justify-center hover:border-neutral-700 transition-colors">
+            <i data-lucide="moon" class="w-4 h-4"></i>
+          </button>
+          
+          <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-800 bg-neutral-900/80 text-neutral-300 rounded-lg flex items-center justify-center hover:border-neutral-700 transition-colors">
+            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+          </button>
+
+          <a href="login.html" class="px-4 py-2.5 text-xs uppercase font-bold tracking-wider border border-neutral-700 rounded-lg text-white hover:bg-neutral-800 transition-colors">
+            Sign In
+          </a>
+          <a href="booking.html" class="px-5 py-2.5 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-brand-redHover rounded-lg shadow-lg shadow-brand-red/25 transition-all">
+            Book Appointment
+          </a>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <button type="button" id="mobile-menu-btn" class="w-10 h-10 flex items-center justify-center border border-neutral-800 rounded-lg text-white">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PREMIUM HOME CONTENT -->
+  <main class="flex-1 pt-20">
+
+    <!-- HERO SECTION WITH PREMIUM GLOW & QUICK CALCULATOR -->
+    <section class="relative bg-brand-charcoal py-20 sm:py-28 border-b border-neutral-800/80 overflow-hidden">
+      <!-- Glow ambient background -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-red/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(#e52323_1px,transparent_1px)] [background-size:28px_28px] opacity-10"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Text -->
+          <div class="lg:col-span-7">
+            <span class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-brand-red bg-brand-red/10 border border-brand-red/20 px-3.5 py-1.5 rounded-full mb-6">
+              <span class="w-2 h-2 rounded-full bg-brand-red animate-ping"></span>
+              High-Performance Auto Facility
+            </span>
+            
+            <h1 class="font-serif text-5xl sm:text-7xl font-extrabold uppercase tracking-tight text-white leading-tight mb-6">
+              Executive Automotive <br>
+              <span class="text-brand-red">Care & Precision.</span>
+            </h1>
+            
+            <p class="text-neutral-400 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
+              Experience zero-wait 15-minute express oil changes, digital health scans, and ASE-certified repairs engineered for optimal vehicle longevity.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <a href="booking.html" class="px-8 py-4 bg-brand-red hover:bg-brand-redHover text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-xl shadow-brand-red/25 transition-all flex items-center gap-2">
+                <span>Book Instant Service</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <a href="pricing.html" class="px-8 py-4 bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors">
+                Explore Packages
+              </a>
+            </div>
+
+            <!-- Quick Stats Row -->
+            <div class="mt-12 pt-8 border-t border-neutral-800/80 grid grid-cols-3 gap-4">
+              <div>
+                <span class="font-serif text-2xl sm:text-3xl font-bold text-white">15 Min</span>
+                <p class="text-[11px] text-neutral-400 uppercase tracking-wider mt-0.5">Express Lane</p>
+              </div>
+              <div>
+                <span class="font-serif text-2xl sm:text-3xl font-bold text-white">100%</span>
+                <p class="text-[11px] text-neutral-400 uppercase tracking-wider mt-0.5">OEM Oils & Filters</p>
+              </div>
+              <div>
+                <span class="font-serif text-2xl sm:text-3xl font-bold text-white">4.9 ★</span>
+                <p class="text-[11px] text-neutral-400 uppercase tracking-wider mt-0.5">Customer Rating</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Premium Interactive Quick Book Card -->
+          <div class="lg:col-span-5">
+            <div class="bg-brand-cardDark border border-neutral-800 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-black relative">
+              <div class="flex items-center justify-between mb-6 pb-4 border-b border-neutral-800">
+                <h3 class="font-serif text-xl font-bold uppercase text-white">Fast Quote Estimator</h3>
+                <span class="text-xs font-mono text-brand-red bg-brand-red/10 px-2.5 py-1 rounded">Live Pricing</span>
+              </div>
+
+              <form action="booking.html" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-mono text-neutral-400 uppercase mb-2">Service Needed</label>
+                  <select class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-xs text-white focus:border-brand-red outline-none">
+                    <option>Full Synthetic Oil Change ($69.99)</option>
+                    <option>Synthetic Blend Express ($54.99)</option>
+                    <option>Brake Service & Rotor Pad ($129.99)</option>
+                    <option>Computer Diagnostic Scan ($79.99)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-neutral-400 uppercase mb-2">Vehicle Type</label>
+                  <select class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-xs text-white focus:border-brand-red outline-none">
+                    <option>Sedan / Coupe</option>
+                    <option>SUV / Crossover</option>
+                    <option>Truck / Commercial</option>
+                    <option>European & Luxury</option>
+                  </select>
+                </div>
+
+                <div class="p-4 bg-neutral-900/60 rounded-xl border border-neutral-800 flex items-center justify-between">
+                  <span class="text-xs text-neutral-400">Estimated Duration:</span>
+                  <span class="text-xs font-bold text-brand-red">~15 to 30 Mins</span>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-brand-red hover:bg-brand-redHover text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-brand-red/20 mt-2">
+                  Reserve This Time Slot
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIUM FEATURES SHOWCASE -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand-red">The Apex Advantage</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-extrabold uppercase text-white mt-2">Why Drivers Prefer Apex Care</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Premium Feature 1 -->
+        <div class="bg-brand-cardDark border border-neutral-800 rounded-2xl p-8 hover:border-brand-red/50 transition-all duration-300 group">
+          <div class="w-14 h-14 bg-neutral-900 border border-neutral-800 text-brand-red rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors">
+            <i data-lucide="zap" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold uppercase text-white mb-3 group-hover:text-brand-red transition-colors">
+            Express Service Bays
+          </h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            No appointment required for basic synthetic oil changes. Our multi-bay setup ensures high throughput without rushing quality.
+          </p>
+        </div>
+
+        <!-- Premium Feature 2 -->
+        <div class="bg-brand-cardDark border border-neutral-800 rounded-2xl p-8 hover:border-brand-red/50 transition-all duration-300 group">
+          <div class="w-14 h-14 bg-neutral-900 border border-neutral-800 text-brand-red rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors">
+            <i data-lucide="smartphone" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold uppercase text-white mb-3 group-hover:text-brand-red transition-colors">
+            Digital Video Reports
+          </h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Receive photos and live videos directly to your smartphone detailing brake wear, tire depth, and fluid condition before approving work.
+          </p>
+        </div>
+
+        <!-- Premium Feature 3 -->
+        <div class="bg-brand-cardDark border border-neutral-800 rounded-2xl p-8 hover:border-brand-red/50 transition-all duration-300 group">
+          <div class="w-14 h-14 bg-neutral-900 border border-neutral-800 text-brand-red rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors">
+            <i data-lucide="shield-check" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold uppercase text-white mb-3 group-hover:text-brand-red transition-colors">
+            Nationwide Warranty
+          </h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            All services and installed factory replacement parts come backed by our comprehensive 12-month / 12,000-mile warranty.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="py-16 bg-brand-cardDark/80 border-t border-b border-neutral-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-brand-red">Priority Service</span>
+          <h2 class="font-serif text-3xl font-extrabold uppercase text-white mt-1">Ready For Premium Auto Care?</h2>
+        </div>
+        <a href="booking.html" class="px-8 py-4 bg-brand-red hover:bg-brand-redHover text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all">
+          Book Appointment Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+   <!-- FOOTER -->
+  <footer class="bg-neutral-950 text-neutral-300 border-t border-neutral-800 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Top 4-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12">
+        
+        <!-- Column 1: Brand & Socials -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-xl font-bold uppercase text-white tracking-wider">Apex Auto</span>
+              <span class="text-[10px] tracking-[0.2em] text-neutral-400 uppercase font-semibold">Care & Oil Change</span>
+            </div>
+          </div>
+
+          <p class="text-xs leading-relaxed text-neutral-400">
+            Providing rapid oil changes, engine diagnostics, brake replacements, and full-service auto care. Timely service by certified mechanics.
+          </p>
+
+          <!-- INLINE SVG SOCIAL ICONS (VISIBLE & RENDERED) -->
+          <div class="flex items-center gap-3 pt-2">
+            <!-- Instagram -->
+            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Instagram">
+              <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
+            </a>
+            <!-- YouTube -->
+            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="YouTube">
+              <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+            <!-- Twitter / X -->
+            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Twitter">
+              <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h3 class="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-neutral-800">Quick Links</h3>
+          <ul class="space-y-2 text-xs">
+            <li><a href="index.html" class="hover:text-brand-red transition-colors">Home 1: Classic</a></li>
+            <li><a href="home-premium.html" class="text-white hover:text-brand-red transition-colors font-bold">Home 2: Premium VIP</a></li>
+            <li><a href="about.html" class="hover:text-brand-red transition-colors font-semibold text-white">About Studio</a></li>
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">Services</a></li>
+            <li><a href="pricing.html" class="hover:text-brand-red transition-colors font-bold text-white">Experience Packages</a></li>
+            <li><a href="gallery.html" class="hover:text-brand-red transition-colors">Portfolio</a></li>
+            <li><a href="contact.html" class="hover:text-brand-red transition-colors">Contact Us</a></li>
+            <li><a href="booking.html" class="hover:text-brand-red transition-colors">Check Availability</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Services & Offerings -->
+        <div>
+          <h3 class="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-neutral-800">Services & Offerings</h3>
+          <ul class="space-y-2 text-xs">
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">Express Oil Change</a></li>
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">Synthetic Lube & Filter</a></li>
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">Computer Engine Diagnostics</a></li>
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">Brake Pad Replacement</a></li>
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">Tire Balance & Rotation</a></li>
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">Battery Check & Change</a></li>
+            <li><a href="services.html" class="hover:text-brand-red transition-colors">AC & Radiator Flush</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact -->
+        <div>
+          <h3 class="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-neutral-800">Studio Contact</h3>
+          <ul class="space-y-3 text-xs">
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-brand-red shrink-0 mt-0.5"></i>
+              <span>123 Creative Avenue, Hyderabad, India</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-brand-red shrink-0"></i>
+              <a href="tel:+919876543210" class="hover:text-white">+91 98765 43210</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-brand-red shrink-0"></i>
+              <a href="mailto:hello@apexautocare.com" class="hover:text-white">hello@apexautocare.com</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="clock" class="w-4 h-4 text-brand-red shrink-0 mt-0.5"></i>
+              <div>
+                <p>Mon - Sat</p>
+                <p class="font-bold text-white">9:00 AM - 7:00 PM</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+        <div>
+          &copy; 2026 Developed by Abhivorn Technologies Pvt. Ltd.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="dashboard.html" class="hover:text-brand-red">Client Portal</a>
+          <a href="#" class="hover:text-brand-red">Privacy Policy</a>
+          <a href="#" class="hover:text-brand-red">Terms & Conditions</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    lucide.createIcons();
+
+    // Theme and RTL Toggles
+    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('apexTheme', isDark ? 'dark' : 'light');
+      });
+    });
+
+    document.querySelectorAll('.rtl-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isRTL = document.documentElement.dir === 'rtl';
+        document.documentElement.dir = isRTL ? 'ltr' : 'rtl';
+        localStorage.setItem('apexRTL', !isRTL);
+      });
+    });
+
+    // Mobile Menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const menuClose = document.getElementById('mobile-menu-close');
+    const menuDrawer = document.getElementById('mobile-menu-drawer');
+    const menuOverlay = document.getElementById('mobile-menu-overlay');
+
+    if(menuBtn) menuBtn.addEventListener('click', () => {
+      menuOverlay.classList.remove('hidden');
+      menuDrawer.classList.remove('hidden');
+      menuDrawer.classList.add('flex');
+    });
+
+    const closeMenu = () => {
+      menuOverlay.classList.add('hidden');
+      menuDrawer.classList.add('hidden');
+      menuDrawer.classList.remove('flex');
+    };
+
+    if(menuClose) menuClose.addEventListener('click', closeMenu);
+    if(menuOverlay) menuOverlay.addEventListener('click', closeMenu);
+
+    // Gallery Filters
+    document.querySelectorAll('.portfolio-filter-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+
+        document.querySelectorAll('.portfolio-filter-btn').forEach(btn => {
+          btn.classList.remove('bg-brand-red', 'text-white');
+          btn.classList.add('bg-neutral-200', 'dark:bg-neutral-800', 'text-neutral-700', 'dark:text-neutral-300');
+        });
+
+        button.classList.remove('bg-neutral-200', 'dark:bg-neutral-800', 'text-neutral-700', 'dark:text-neutral-300');
+        button.classList.add('bg-brand-red', 'text-white');
+
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+
+</body>
+</html>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

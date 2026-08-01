@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Apex Auto Care</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              charcoal: '#0b0d12',
+              cardDark: '#121620',
+              red: '#e52323',
+              redHover: '#cc1e1e'
+            }
+          },
+          fontFamily: {
+            serif: ['Oswald', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* View Slider Animation Container */
+    .slider-wrapper {
+      display: flex;
+      width: 200vw;
+      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    
+    .show-login {
+      transform: translateX(0vw);
+    }
+    
+    .show-portal {
+      transform: translateX(-100vw);
+    }
+
+    /* Active Nav Button Styling */
+    .nav-btn-active {
+      background-color: #e52323 !important;
+      color: #ffffff !important;
+      box-shadow: 0 10px 25px -5px rgba(229, 35, 35, 0.4);
+      font-weight: 700 !important;
+    }
+
+    .nav-btn-inactive {
+      background-color: transparent !important;
+      color: #9ca3af !important;
+    }
+
+    .nav-btn-inactive:hover {
+      background-color: #181d29 !important;
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-brand-charcoal text-neutral-100 font-sans selection:bg-brand-red selection:text-white overflow-x-hidden">
+
+  <!-- VIEW SLIDER WRAPPER -->
+  <div id="sliderWrapper" class="slider-wrapper min-h-screen show-login">
+
+    <!-- =================================================================== -->
+    <!-- SLIDE 1: ADMIN LOGIN FORM                                          -->
+    <!-- =================================================================== -->
+    <section class="w-screen min-h-screen flex items-center justify-center p-4 sm:p-6 shrink-0 relative bg-brand-charcoal">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(229,35,35,0.08)_0,transparent_70%)] pointer-events-none"></div>
+
+      <div class="w-full max-w-md bg-brand-cardDark border border-neutral-800 rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10 space-y-6">
+        
+        <!-- Logo Header -->
+        <div class="text-center space-y-2">
+          <div class="w-12 h-12 bg-brand-red text-white flex items-center justify-center rounded-2xl mx-auto shadow-lg shadow-brand-red/30 mb-4">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h1 class="font-serif text-3xl font-extrabold uppercase tracking-wider text-white">Apex Admin</h1>
+          <p class="text-xs text-neutral-400">Restricted Portal Access for Authorized Personnel</p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="adminLoginForm" class="space-y-4" onsubmit="handleAdminLogin(event)">
+          <div id="loginError" class="hidden p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-xs text-center font-semibold">
+            Invalid Admin Passcode or ID.
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase text-neutral-400 mb-1.5">Admin ID / Email</label>
+            <div class="relative">
+              <i data-lucide="user" class="w-4 h-4 text-neutral-500 absolute left-3.5 top-3.5"></i>
+              <input type="text" id="adminId" required placeholder="admin@apexauto.com" value="admin@apexauto.com"
+                class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-10 pr-4 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-all">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase text-neutral-400 mb-1.5">Password</label>
+            <div class="relative">
+              <i data-lucide="lock" class="w-4 h-4 text-neutral-500 absolute left-3.5 top-3.5"></i>
+              <input type="password" id="adminPassword" required placeholder="••••••••" value="admin123"
+                class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-10 pr-4 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-all">
+            </div>
+          </div>
+
+          <button type="submit" 
+            class="w-full py-3.5 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-brand-red/25 transition-all flex items-center justify-center gap-2">
+            <span>Sign In to Portal</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <div class="pt-2 text-center">
+          <a href="index.html" class="text-xs text-neutral-500 hover:text-neutral-300 transition-colors">← Back to Main Website</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SLIDE 2: ADMIN PORTAL DASHBOARD                                     -->
+    <!-- =================================================================== -->
+    <section class="w-screen min-h-screen flex shrink-0 bg-brand-charcoal">
+      
+      <!-- SIDEBAR NAVIGATION -->
+      <aside class="w-64 border-r border-neutral-800 bg-brand-charcoal flex flex-col justify-between hidden md:flex shrink-0">
+        <div class="p-6">
+          <a href="index.html" class="flex items-center gap-3 group mb-8">
+            <div class="w-9 h-9 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-xl font-extrabold uppercase tracking-wider text-white leading-none">Apex Admin</span>
+              <span class="text-[8px] tracking-[0.2em] text-neutral-400 uppercase font-semibold mt-1">Management Hub</span>
+            </div>
+          </a>
+
+          <!-- FUNCTIONAL BUTTONS -->
+          <nav class="space-y-2 font-semibold text-xs">
+            <button id="navOverview" onclick="switchSection('overview')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-active">
+              <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Overview
+            </button>
+            
+            <button id="navBays" onclick="switchSection('bays')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive">
+              <i data-lucide="cpu" class="w-4 h-4"></i> Live Express Bays
+            </button>
+            
+            <button id="navBookings" onclick="switchSection('bookings')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive">
+              <i data-lucide="calendar" class="w-4 h-4"></i> Bookings Queue
+            </button>
+          </nav>
+        </div>
+
+        <div class="p-4 border-t border-neutral-800">
+          <button onclick="handleAdminLogout()" class="w-full bg-neutral-900 hover:bg-neutral-800 p-3 rounded-2xl flex items-center justify-between transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-brand-red/20 border border-brand-red/40 text-brand-red font-bold text-xs flex items-center justify-center">
+                AD
+              </div>
+              <div class="flex flex-col text-left">
+                <span class="text-xs font-bold text-white leading-tight">Admin Manager</span>
+                <span class="text-[10px] text-neutral-500">Shop #1044</span>
+              </div>
+            </div>
+            <i data-lucide="log-out" class="w-4 h-4 text-neutral-400 hover:text-brand-red"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN PORTAL CONTAINER -->
+      <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        <header class="h-20 border-b border-neutral-800 bg-brand-charcoal/95 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-40">
+          <div class="flex items-center gap-4">
+            <h2 id="portalHeaderTitle" class="font-serif text-2xl font-bold uppercase text-white tracking-wider">Overview Dashboard</h2>
+            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Systems Live
+            </span>
+          </div>
+
+          <button onclick="handleAdminLogout()" class="px-4 py-2 text-xs font-bold uppercase tracking-wider border border-brand-red/30 text-brand-red hover:bg-brand-red hover:text-white rounded-xl transition-all">
+            Sign Out
+          </button>
+        </header>
+
+        <main class="p-6 sm:p-8 space-y-8 max-w-7xl">
+          
+          <!-- SECTION 1: OVERVIEW PANEL -->
+          <div id="sectionOverview" class="space-y-8">
+            <!-- STATS CARDS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div class="bg-brand-cardDark border border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-400 uppercase">Today's Revenue</span>
+                  <h3 class="font-serif text-2xl font-bold text-white mt-1">$3,840.00</h3>
+                  <span class="text-[10px] text-emerald-400 font-bold">+14% vs yesterday</span>
+                </div>
+                <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center">
+                  <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <div class="bg-brand-cardDark border border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-400 uppercase">Vehicles Serviced</span>
+                  <h3 class="font-serif text-2xl font-bold text-white mt-1">28 Cars</h3>
+                  <span class="text-[10px] text-neutral-400">8 in Express Bays</span>
+                </div>
+                <div class="w-12 h-12 bg-brand-red/10 border border-brand-red/20 text-brand-red rounded-xl flex items-center justify-center">
+                  <i data-lucide="car" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <div class="bg-brand-cardDark border border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-400 uppercase">Active Bay Occupancy</span>
+                  <h3 class="font-serif text-2xl font-bold text-white mt-1">4 / 4 Bays</h3>
+                  <span class="text-[10px] text-brand-red font-bold">100% Full Capacity</span>
+                </div>
+                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center">
+                  <i data-lucide="activity" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <div class="bg-brand-cardDark border border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-400 uppercase">Pending Appointments</span>
+                  <h3 class="font-serif text-2xl font-bold text-white mt-1">12 Slots</h3>
+                  <span class="text-[10px] text-neutral-400">Next at 05:00 PM</span>
+                </div>
+                <div class="w-12 h-12 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center">
+                  <i data-lucide="clock" class="w-6 h-6"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: LIVE BAYS MONITOR -->
+          <section id="sectionBays" class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <i data-lucide="cpu" class="w-5 h-5 text-brand-red"></i>
+                <h3 class="font-serif text-xl font-bold uppercase text-white">Live Express Bays Monitor</h3>
+              </div>
+              <button onclick="alert('Bay statuses refreshed!')" class="px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-lg text-xs font-mono text-neutral-300 hover:text-white">Refresh Bays</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-neutral-900 border border-brand-red/40 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-white">BAY 01</span>
+                  <span class="text-[10px] font-mono bg-brand-red/10 border border-brand-red/30 text-brand-red px-2.5 py-0.5 rounded-full uppercase">In Service</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-white">2022 BMW M3 Competition</p>
+                  <p class="text-[11px] text-neutral-400">Full Euro Protection Oil Swap</p>
+                </div>
+                <div class="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-brand-red h-full w-3/4"></div>
+                </div>
+              </div>
+
+              <div class="bg-neutral-900 border border-brand-red/40 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-white">BAY 02</span>
+                  <span class="text-[10px] font-mono bg-brand-red/10 border border-brand-red/30 text-brand-red px-2.5 py-0.5 rounded-full uppercase">In Service</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-white">2020 Porsche 911 GT3</p>
+                  <p class="text-[11px] text-neutral-400">Synthetic Fluid Swap & Filter</p>
+                </div>
+                <div class="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-amber-500 h-full w-2/5"></div>
+                </div>
+              </div>
+
+              <div class="bg-neutral-900 border border-emerald-500/40 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-white">BAY 03</span>
+                  <span class="text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2.5 py-0.5 rounded-full uppercase">Inspection</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-white">2021 Ford F-150 Lariat</p>
+                  <p class="text-[11px] text-neutral-400">Express Oil + Brake Check</p>
+                </div>
+                <div class="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-emerald-500 h-full w-full"></div>
+                </div>
+              </div>
+
+              <div class="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-white">BAY 04</span>
+                  <span class="text-[10px] font-mono bg-neutral-800 border border-neutral-700 text-neutral-400 px-2.5 py-0.5 rounded-full uppercase">Staging</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-white">2023 Audi RS6 Avant</p>
+                  <p class="text-[11px] text-neutral-400">Scheduled for 05:15 PM</p>
+                </div>
+                <div class="w-full bg-neutral-800 h-2 rounded-full"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 3: BOOKINGS QUEUE -->
+          <section id="sectionBookings" class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <i data-lucide="calendar" class="w-5 h-5 text-brand-red"></i>
+                <h3 class="font-serif text-xl font-bold uppercase text-white">Bookings Queue</h3>
+              </div>
+              <a href="booking.html" class="px-3.5 py-2 bg-brand-red text-white font-bold text-xs uppercase rounded-xl shadow-md shadow-brand-red/20">+ Add Booking</a>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-neutral-300">
+                <thead class="bg-neutral-900 uppercase font-mono text-[10px] text-neutral-400 border-b border-neutral-800">
+                  <tr>
+                    <th class="p-3.5">Booking ID</th>
+                    <th class="p-3.5">Customer Name</th>
+                    <th class="p-3.5">Vehicle</th>
+                    <th class="p-3.5">Requested Service</th>
+                    <th class="p-3.5">Time Slot</th>
+                    <th class="p-3.5">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-800">
+                  <tr class="hover:bg-neutral-900/50 transition-colors">
+                    <td class="p-3.5 font-mono text-brand-red font-bold">#APX-9082</td>
+                    <td class="p-3.5 font-bold text-white">Alex Morgan</td>
+                    <td class="p-3.5">2021 Ford F-150</td>
+                    <td class="p-3.5">Full Euro Protection Swap</td>
+                    <td class="p-3.5 font-mono">04:30 PM</td>
+                    <td class="p-3.5"><span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full text-[10px]">Confirmed</span></td>
+                  </tr>
+                  <tr class="hover:bg-neutral-900/50 transition-colors">
+                    <td class="p-3.5 font-mono text-brand-red font-bold">#APX-9083</td>
+                    <td class="p-3.5 font-bold text-white">Sarah Jenkins</td>
+                    <td class="p-3.5">2023 Toyota RAV4</td>
+                    <td class="p-3.5">Express Synthetic Swap</td>
+                    <td class="p-3.5 font-mono">05:00 PM</td>
+                    <td class="p-3.5"><span class="bg-amber-500/10 border border-amber-500/20 text-amber-400 px-2.5 py-1 rounded-full text-[10px]">Pending Bay</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    lucide.createIcons();
+
+    const sliderWrapper = document.getElementById('sliderWrapper');
+    const loginError = document.getElementById('loginError');
+
+    // Admin Authentication
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const id = document.getElementById('adminId').value;
+      const pwd = document.getElementById('adminPassword').value;
+
+      if (id && pwd) {
+        loginError.classList.add('hidden');
+        sliderWrapper.classList.remove('show-login');
+        sliderWrapper.classList.add('show-portal');
+        switchSection('overview'); // Set default section
+      } else {
+        loginError.classList.remove('hidden');
+      }
+    }
+
+    function handleAdminLogout() {
+      sliderWrapper.classList.remove('show-portal');
+      sliderWrapper.classList.add('show-login');
+    }
+
+    // FUNCTIONALITY FOR SIDEBAR BUTTONS
+    function switchSection(target) {
+      const secOverview = document.getElementById('sectionOverview');
+      const secBays = document.getElementById('sectionBays');
+      const secBookings = document.getElementById('sectionBookings');
+
+      const btnOverview = document.getElementById('navOverview');
+      const btnBays = document.getElementById('navBays');
+      const btnBookings = document.getElementById('navBookings');
+
+      const headerTitle = document.getElementById('portalHeaderTitle');
+
+      // Reset Button Styles
+      [btnOverview, btnBays, btnBookings].forEach(btn => {
+        btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive";
+      });
+
+      // Switch active view
+      if (target === 'overview') {
+        secOverview.style.display = 'block';
+        secBays.style.display = 'block';
+        secBookings.style.display = 'block';
+        btnOverview.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-active";
+        headerTitle.innerText = "Overview Dashboard";
+      } else if (target === 'bays') {
+        secOverview.style.display = 'none';
+        secBays.style.display = 'block';
+        secBookings.style.display = 'none';
+        btnBays.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-active";
+        headerTitle.innerText = "Live Express Bays";
+      } else if (target === 'bookings') {
+        secOverview.style.display = 'none';
+        secBays.style.display = 'none';
+        secBookings.style.display = 'block';
+        btnBookings.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-active";
+        headerTitle.innerText = "Bookings Queue";
+      }
+    }
+  </script>
+</body>
+</html>

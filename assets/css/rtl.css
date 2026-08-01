@@ -1,0 +1,93 @@
+/**
+ * Apex Auto Care - Right-to-Left (RTL) Stylesheet
+ * File: rtl.css
+ */
+
+/* ==========================================================================
+   1. GLOBAL TEXT ALIGNMENT & DIRECTION
+   ========================================================================== */
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Fix font rendering for RTL scripts if needed */
+html[dir="rtl"] body,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================================================
+   2. ICON & FLEXBOX FLIPPING
+   ========================================================================== */
+
+/* Flip left-positioned icons to the right inside inputs */
+html[dir="rtl"] .relative i[data-lucide],
+html[dir="rtl"] .relative svg.lucide {
+  left: auto !important;
+  right: 1rem !important;
+}
+
+/* Adjust padding for input fields with icons */
+html[dir="rtl"] input.pl-11 {
+  padding-left: 1rem !important;
+  padding-right: 2.75rem !important;
+}
+
+/* Flip arrow indicators */
+html[dir="rtl"] .lucide-arrow-right,
+html[dir="rtl"] .lucide-chevron-right,
+html[dir="rtl"] .lucide-send {
+  transform: scaleX(-1);
+}
+
+/* Reverse flex gap orientations where margins were used */
+html[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+html[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+html[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1 !important;
+}
+
+/* ==========================================================================
+   3. COMPONENT-SPECIFIC OVERRIDES
+   ========================================================================== */
+
+/* Header & Navbar Badge Adjustments */
+html[dir="rtl"] header .flex {
+  flex-direction: row;
+}
+
+/* Gallery & Service Badge Positioning */
+html[dir="rtl"] [data-category] .absolute.top-4.left-4 {
+  left: auto !important;
+  right: 1rem !important;
+}
+
+/* Checkbox alignment */
+html[dir="rtl"] input[type="checkbox"] {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Select dropdown arrow placement */
+html[dir="rtl"] select {
+  background-position: left 0.75rem center !important;
+}
+
+/* ==========================================================================
+   4. FORM FLOATING LABELS & BORDERS
+   ========================================================================== */
+html[dir="rtl"] label {
+  text-align: right;
+}
+
+html[dir="rtl"] .border-l-2,
+html[dir="rtl"] .border-l-4 {
+  border-left-width: 0 !important;
+  border-right-width: 4px !important;
+}
