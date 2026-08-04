@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="scroll-smooth dark">
+<html lang="en" dir="ltr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Express Oil Change & Maintenance | Apex Auto Care</title>
+  <title>Coming Soon | Apex Auto Care</title>
+  <meta name="description" content="Something exciting is under the hood! We are upgrading our service garage and client platform.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,10 +20,8 @@
         extend: {
           colors: {
             brand: {
-              charcoal: '#0b0d12',
-              cardDark: '#121620',
-              red: '#e52323',
-              redHover: '#cc1e1e'
+              charcoal: '#121824',
+              red: '#DC2626'
             }
           },
           fontFamily: {
@@ -34,276 +33,167 @@
     }
   </script>
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="assets/css/dark-mode.css">
-  <link rel="stylesheet" href="assets/css/rtl.css">
-
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Early Theme & RTL Restore -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('apexTheme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const rtl = localStorage.getItem('apexRTL');
+      if (rtl === 'rtl' || rtl === 'true') {
+        document.documentElement.dir = 'rtl';
+      } else {
+        document.documentElement.dir = 'ltr';
+      }
+    })();
+  </script>
 </head>
-<body class="min-h-screen flex flex-col bg-brand-charcoal text-neutral-100 font-sans selection:bg-brand-red selection:text-white">
+<body class="min-h-screen flex flex-col justify-between bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 font-sans">
 
-  <!-- NAVBAR -->
-  <header class="fixed top-0 left-0 right-0 z-50 border-b border-neutral-800/80 bg-brand-charcoal/95 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        
-        <!-- Brand Logo -->
-        <a href="index.html" class="flex items-center gap-3 shrink-0 group">
-          <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
-            <i data-lucide="wrench" class="w-5 h-5"></i>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-serif text-2xl font-extrabold uppercase tracking-wider text-white leading-none">Apex Auto</span>
-            <span class="text-[9px] tracking-[0.25em] text-neutral-400 uppercase font-semibold mt-1">Care & Oil Change</span>
-          </div>
-        </a>
-
-        <!-- Desktop Navigation Links -->
-        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
-          <a href="index.html" class="text-neutral-300 hover:text-white transition-colors">Home</a>
-          <a href="services.html" class="text-neutral-300 hover:text-white transition-colors">Services</a>
-          <a href="oil-change.html" class="text-brand-red font-bold">Oil Services</a>
-          <a href="express-bays.html" class="text-neutral-300 hover:text-white transition-colors">Express Bays</a>
-          <a href="pricing.html" class="text-neutral-300 hover:text-white transition-colors">Pricing</a>
-          <a href="admin.html" class="text-neutral-300 hover:text-white transition-colors">Admin Portal</a>
-        </nav>
-
-        <!-- Right Side Controls -->
-        <div class="hidden lg:flex items-center gap-4">
-          <a href="booking.html" class="px-4 py-2 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-brand-redHover rounded-lg shadow-lg shadow-brand-red/25 transition-all">
-            Book Oil Service
-          </a>
+  <!-- TOP HEADER / COMPACT NAV -->
+  <header class="w-full border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 shrink-0">
+        <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold">
+          <i data-lucide="wrench" class="w-5 h-5"></i>
         </div>
+        <div class="flex flex-col">
+          <span class="font-serif text-xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-white leading-tight">Apex Auto</span>
+          <span class="text-[10px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold">Care & Oil Change</span>
+        </div>
+      </a>
 
+      <!-- Quick Toggles -->
+      <div class="flex items-center gap-3">
+        <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+          <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+          <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+        </button>
+        <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+          <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+        </button>
+        <a href="index.html" class="hidden sm:inline-flex px-4 py-2 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-red-700 rounded shadow-md transition-all">
+          Back To Home
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="pt-32 pb-12 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(229,35,35,0.12)_0,transparent_60%)] pointer-events-none"></div>
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 flex items-center justify-center py-16 px-4 relative overflow-hidden">
+    <!-- Background Grid Pattern -->
+    <div class="absolute inset-0 opacity-10 dark:opacity-20 bg-[radial-gradient(#DC2626_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-brand-red bg-brand-red/10 border border-brand-red/20 px-3.5 py-1.5 rounded-full inline-block mb-4">
-        15-Minute Pit Stop Guarantee
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
+      
+      <!-- Icon Badge -->
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-brand-red/10 text-brand-red border border-brand-red/30 rounded-full mb-6 shadow-inner animate-pulse">
+        <i data-lucide="gauge" class="w-10 h-10"></i>
+      </div>
+
+      <span class="block font-mono text-xs uppercase tracking-[0.25em] text-brand-red font-bold mb-3">
+        Under High Performance Tuning
       </span>
-      <h1 class="font-serif text-4xl sm:text-6xl font-extrabold uppercase text-white tracking-wide max-w-4xl mx-auto">
-        Precision Oil Swaps & Engine Protection
+
+      <h1 class="font-serif text-4xl sm:text-6xl font-extrabold uppercase text-brand-charcoal dark:text-white mb-4 leading-tight">
+        Something Great Is <br>
+        <span class="text-brand-red">Coming Soon</span>
       </h1>
-      <p class="text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto mt-4">
-        Engineered for high performance, daily commuting, and European specs. We use premium synthetic lubricants and OEM-grade filter media.
+
+      <p class="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm max-w-lg mx-auto mb-10 leading-relaxed">
+        We are fine-tuning a brand new experience for our clients. Sign up below to receive an instant notification as soon as we open the bay doors.
       </p>
 
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a href="booking.html" class="px-6 py-3 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-brand-red/25 transition-all">
-          Reserve Express Slot
+      <!-- COUNTDOWN TIMER -->
+      <div class="grid grid-cols-4 gap-3 sm:gap-6 max-w-lg mx-auto mb-10">
+        <div class="p-3 sm:p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm">
+          <span id="days" class="font-serif text-2xl sm:text-4xl font-bold text-brand-charcoal dark:text-white block">24</span>
+          <span class="text-[10px] sm:text-xs font-mono uppercase text-neutral-400">Days</span>
+        </div>
+        <div class="p-3 sm:p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm">
+          <span id="hours" class="font-serif text-2xl sm:text-4xl font-bold text-brand-charcoal dark:text-white block">12</span>
+          <span class="text-[10px] sm:text-xs font-mono uppercase text-neutral-400">Hours</span>
+        </div>
+        <div class="p-3 sm:p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm">
+          <span id="minutes" class="font-serif text-2xl sm:text-4xl font-bold text-brand-charcoal dark:text-white block">45</span>
+          <span class="text-[10px] sm:text-xs font-mono uppercase text-neutral-400">Mins</span>
+        </div>
+        <div class="p-3 sm:p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm">
+          <span id="seconds" class="font-serif text-2xl sm:text-4xl font-bold text-brand-red block">00</span>
+          <span class="text-[10px] sm:text-xs font-mono uppercase text-neutral-400">Secs</span>
+        </div>
+      </div>
+
+      <!-- NOTIFICATION FORM -->
+      <form onsubmit="event.preventDefault(); alert('Thank you! We will notify you once launched.');" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2">
+        <input type="email" required placeholder="Enter your email address" class="flex-1 px-4 py-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded text-neutral-800 dark:text-neutral-200 focus:outline-none focus:border-brand-red">
+        <button type="submit" class="px-6 py-3 bg-brand-red hover:bg-red-700 text-white text-xs font-bold uppercase tracking-wider rounded shadow-md transition-all shrink-0">
+          Notify Me
+        </button>
+      </form>
+
+      <!-- Return Button -->
+      <div class="mt-8">
+        <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase text-neutral-500 hover:text-brand-red transition-colors">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> Return to main site
         </a>
-        <a href="#packages" class="px-6 py-3 bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
-          View Oil Packages
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- INTERACTIVE OIL CALCULATOR & SELECTOR -->
-  <section class="py-12 bg-neutral-950/60 border-y border-neutral-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        
-        <div class="lg:col-span-5 space-y-4">
-          <span class="text-[10px] font-mono uppercase text-brand-red tracking-wider">Quick Recommendation</span>
-          <h2 class="font-serif text-2xl sm:text-3xl font-bold uppercase text-white">Find Your Ideal Oil Spec</h2>
-          <p class="text-xs text-neutral-400">
-            Select your driving habits and engine type to see our recommended oil blend and estimated price.
-          </p>
-
-          <div class="space-y-3 pt-2">
-            <div>
-              <label class="block text-[11px] font-mono uppercase text-neutral-400 mb-1">Engine Type</label>
-              <select id="calcEngine" onchange="calculateOil()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-red">
-                <option value="standard">Standard / Import Gas Engine</option>
-                <option value="euro">European High-Performance (BMW, Audi, Porsche)</option>
-                <option value="truck">Heavy-Duty Truck / SUV (V8 or Diesel)</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-[11px] font-mono uppercase text-neutral-400 mb-1">Driving Condition</label>
-              <select id="calcCondition" onchange="calculateOil()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-red">
-                <option value="city">Daily City Driving & Commuting</option>
-                <option value="highway">High-Mileage / Highway</option>
-                <option value="track">Performance / Severe Duty</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 bg-neutral-900 border border-neutral-800 rounded-2xl p-6 sm:p-8 space-y-6">
-          <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
-            <div>
-              <span class="text-[10px] font-mono uppercase text-neutral-500">Recommended Service</span>
-              <h3 id="recTitle" class="font-serif text-xl font-bold uppercase text-white mt-0.5">Express Full Synthetic Swap</h3>
-            </div>
-            <div class="text-right">
-              <span class="text-[10px] font-mono uppercase text-neutral-500 block">Starting At</span>
-              <span id="recPrice" class="font-serif text-2xl font-bold text-brand-red">$69.00</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div class="flex items-center gap-3">
-              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400 shrink-0"></i>
-              <span text-neutral-300 id="recOilType">5W-30 Full Synthetic API SP Spec</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <i data-lucide="clock" class="w-5 h-5 text-brand-red shrink-0"></i>
-              <span text-neutral-300>15 to 20 Minute Express Bay Time</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <i data-lucide="filter" class="w-5 h-5 text-blue-400 shrink-0"></i>
-              <span text-neutral-300>OEM High-Efficiency Filter Replacement</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <i data-lucide="check-circle-2" class="w-5 h-5 text-amber-400 shrink-0"></i>
-              <span text-neutral-300>Includes 12-Point Safety Fluid Inspection</span>
-            </div>
-          </div>
-
-          <a href="booking.html" class="block w-full text-center py-3 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
-            Book Recommended Service
-          </a>
-        </div>
-
       </div>
 
     </div>
-  </section>
-
-  <!-- OIL PACKAGES PRICING SECTION -->
-  <section id="packages" class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-      
-      <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-[10px] font-mono uppercase text-brand-red tracking-widest">Transparent Pricing</span>
-        <h2 class="font-serif text-3xl sm:text-4xl font-extrabold uppercase text-white">Oil Service Tiers</h2>
-        <p class="text-neutral-400 text-xs sm:text-sm">No hidden shop fees. Every package comes with multi-point checks and fluid top-offs.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <!-- TIER 1 -->
-        <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-neutral-700 transition-all">
-          <div class="space-y-4">
-            <span class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">Conventional / Blend</span>
-            <h3 class="font-serif text-2xl font-bold uppercase text-white">Synthetic Blend</h3>
-            <div class="font-serif text-3xl font-bold text-white">$49<span class="text-xs font-sans text-neutral-500">.00</span></div>
-            <p class="text-xs text-neutral-400">Great for standard commuting vehicles under 75,000 miles requiring standard protection.</p>
-            
-            <ul class="space-y-2.5 text-xs text-neutral-300 pt-4 border-t border-neutral-800">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Up to 5 Qts Synthetic Blend</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Premium Spin-On Filter</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Tire Pressure Check</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Washer Fluid Top-Off</li>
-            </ul>
-          </div>
-
-          <a href="booking.html" class="w-full py-3 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center block transition-all">
-            Select Blend Package
-          </a>
-        </div>
-
-        <!-- TIER 2 (FEATURED) -->
-        <div class="bg-brand-cardDark border-2 border-brand-red rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between relative shadow-2xl shadow-brand-red/10">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-red text-white text-[9px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-            Most Popular
-          </div>
-
-          <div class="space-y-4">
-            <span class="text-[10px] font-mono uppercase tracking-wider text-brand-red bg-brand-red/10 px-3 py-1 rounded-full border border-brand-red/20">Full Synthetic</span>
-            <h3 class="font-serif text-2xl font-bold uppercase text-white">Full Synthetic Pit</h3>
-            <div class="font-serif text-3xl font-bold text-white">$69<span class="text-xs font-sans text-neutral-500">.00</span></div>
-            <p class="text-xs text-neutral-400">Maximum thermal protection against friction, sludge, and heat breakdown.</p>
-            
-            <ul class="space-y-2.5 text-xs text-neutral-300 pt-4 border-t border-neutral-800">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Up to 5 Qts Full Synthetic</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Synthetic Filter Element</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Express Bay Priority Access</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Complete Multi-Point Check</li>
-            </ul>
-          </div>
-
-          <a href="booking.html" class="w-full py-3 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center block shadow-lg shadow-brand-red/25 transition-all">
-            Book Express Synthetic
-          </a>
-        </div>
-
-        <!-- TIER 3 -->
-        <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-neutral-700 transition-all">
-          <div class="space-y-4">
-            <span class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">OEM Euro Spec</span>
-            <h3 class="font-serif text-2xl font-bold uppercase text-white">Euro Protection</h3>
-            <div class="font-serif text-3xl font-bold text-white">$129<span class="text-xs font-sans text-neutral-500">.00</span></div>
-            <p class="text-xs text-neutral-400">Formulated specifically for BMW Longlife, Porsche A40, and Audi/VW approvals.</p>
-            
-            <ul class="space-y-2.5 text-xs text-neutral-300 pt-4 border-t border-neutral-800">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Up to 7 Qts Approved Euro Oil</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> OEM Filter & O-Ring Swap</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Service Interval Computer Reset</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Full OBD-II Diagnostic Scan</li>
-            </ul>
-          </div>
-
-          <a href="booking.html" class="w-full py-3 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center block transition-all">
-            Select Euro Package
-          </a>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer class="bg-black text-neutral-500 border-t border-neutral-800 py-8 text-xs mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-      <p>&copy; 2026 Apex Auto Care & Oil Change. All rights reserved.</p>
-      <div class="flex justify-center gap-6 text-neutral-400">
-        <a href="index.html" class="hover:text-white">Home</a>
-        <a href="services.html" class="hover:text-white">Services</a>
-        <a href="booking.html" class="hover:text-white">Book Now</a>
-        <a href="admin.html" class="hover:text-white">Admin Portal</a>
+  <footer class="bg-neutral-950 border-t border-neutral-800 py-6 text-xs text-neutral-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        &copy; 2026 Developed by Abhivorn Technologies Pvt. Ltd. All Rights Reserved.
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-brand-red transition-colors">Home</a>
+        <a href="contact.html" class="hover:text-brand-red transition-colors">Contact</a>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT -->
+  <!-- JS SCRIPTS -->
   <script>
     lucide.createIcons();
 
-    function calculateOil() {
-      const engine = document.getElementById('calcEngine').value;
-      const condition = document.getElementById('calcCondition').value;
+    // Theme Toggle Script
+    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('apexTheme', isDark ? 'dark' : 'light');
+      });
+    });
 
-      const title = document.getElementById('recTitle');
-      const price = document.getElementById('recPrice');
-      const oilType = document.getElementById('recOilType');
+    // RTL Toggle Script
+    document.querySelectorAll('.rtl-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isRTL = document.documentElement.dir === 'rtl';
+        document.documentElement.dir = isRTL ? 'ltr' : 'rtl';
+        localStorage.setItem('apexRTL', !isRTL);
+      });
+    });
 
-      if (engine === 'euro') {
-        title.innerText = "Euro Protection Synthetic Package";
-        price.innerText = "$129.00";
-        oilType.innerText = "0W-40 / 5W-40 Euro Approved Spec";
-      } else if (engine === 'truck' || condition === 'track') {
-        title.innerText = "Heavy-Duty Full Synthetic Swap";
-        price.innerText = "$89.00";
-        oilType.innerText = "5W-40 Heavy Duty / High Viscosity Blend";
-      } else {
-        title.innerText = "Express Full Synthetic Swap";
-        price.innerText = "$69.00";
-        oilType.innerText = "5W-30 Full Synthetic API SP Spec";
-      }
-    }
+    // Countdown Timer Logic
+    const launchDate = new Date().getTime() + (24 * 24 * 60 * 60 * 1000); // 24 Days from now
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+    }, 1000);
   </script>
 </body>
 </html>
