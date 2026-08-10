@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | Apex Auto Care & Oil Change</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              charcoal: '#0b0d12',
+              cardDark: '#121620',
+              red: '#e52323',
+              redHover: '#cc1e1e'
+            }
+          },
+          fontFamily: {
+            serif: ['Oswald', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
+</head>
+<body class="min-h-screen flex flex-col bg-brand-charcoal text-neutral-100 transition-colors duration-300 font-sans selection:bg-brand-red selection:text-white">
+
+  
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 pt-20 flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <!-- Back to Home -->
+    <a href="index.html" class="absolute top-6 left-6 sm:top-8 sm:left-8 flex items-center gap-2 text-neutral-500 hover:text-white transition-colors font-semibold text-xs uppercase tracking-wider z-50">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+    </a>
+
+    
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 bg-[radial-gradient(#e52323_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none"></div>
+
+    <div class="w-full max-w-md relative z-10">
+      
+      <!-- CARD CONTAINER -->
+      <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+        
+        <!-- Toggles -->
+        <div class="absolute top-4 right-4 flex items-center gap-2">
+          <button type="button" class="theme-toggle-btn w-8 h-8 rounded bg-neutral-900 border border-neutral-800 text-neutral-400 flex items-center justify-center hover:text-white transition-colors">
+            <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+            <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+          </button>
+          <button type="button" class="rtl-toggle-btn w-8 h-8 rounded bg-neutral-900 border border-neutral-800 text-neutral-400 flex items-center justify-center hover:text-white transition-colors">
+            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Brand Logo -->
+        <div class="flex justify-center mb-6">
+          <a href="index.html" class="flex items-center gap-2 group">
+            <div class="w-8 h-8 bg-brand-red text-white flex items-center justify-center rounded font-bold shadow-lg shadow-brand-red/30">
+              <i data-lucide="wrench" class="w-4 h-4"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-xl font-extrabold uppercase tracking-wider text-white leading-none">AutoCare</span>
+            </div>
+          </a>
+        </div>
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="flex justify-center mb-6">
+            <div class="inline-flex bg-neutral-900 border border-neutral-800 rounded-xl p-1">
+              <button type="button" id="tabCustomer" onclick="switchLoginMode('customer')" class="px-6 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-brand-red text-white shadow-lg transition-all">Customer</button>
+              <button type="button" id="tabAdmin" onclick="switchLoginMode('admin')" class="px-6 py-2 text-xs font-bold uppercase tracking-wider rounded-lg text-neutral-400 hover:text-white transition-all">Admin</button>
+            </div>
+          </div>
+          <h1 id="loginTitle" class="font-serif text-3xl font-extrabold uppercase text-white tracking-tight">Welcome Back</h1>
+          <p id="loginDesc" class="text-neutral-400 text-xs mt-2">Log in to manage appointments and view vehicle service history.</p>
+        </div>
+
+        <!-- SIGN IN FORM -->
+        <form id="loginForm" action="customer-dashboard.html" method="POST" class="space-y-4">
+          
+          <!-- Email Address -->
+          <div>
+            <label class="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-2">Email Address *</label>
+            <div class="relative">
+              <i data-lucide="mail" class="w-4 h-4 text-neutral-500 absolute left-4 top-3.5"></i>
+              <input type="email" placeholder="name@example.com" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-11 pr-4 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-colors">
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-xs font-mono uppercase tracking-wider text-neutral-400">Password *</label>
+              
+            </div>
+            <div class="relative">
+              <i data-lucide="lock" class="w-4 h-4 text-neutral-500 absolute left-4 top-3.5"></i>
+              <input type="password" placeholder="••••••••" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-11 pr-10 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-colors">
+              <button type="button" class="absolute right-4 top-3.5 text-neutral-500 hover:text-neutral-300" onclick="const input = this.previousElementSibling; input.type = input.type === 'password' ? 'text' : 'password';">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="remember" class="accent-brand-red bg-neutral-900 border-neutral-800 rounded">
+              <label for="remember" class="text-xs text-neutral-400">
+                Remember me
+              </label>
+            </div>
+            <a href="contact.html" class="text-[11px] text-brand-red hover:underline font-medium">Forgot password?</a>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="w-full py-3.5 text-xs uppercase font-bold tracking-wider bg-brand-red hover:bg-brand-redHover text-white rounded-xl shadow-lg shadow-brand-red/25 transition-all flex items-center justify-center gap-2 mt-2">
+            <i data-lucide="log-in" class="w-4 h-4"></i> Sign In
+          </button>
+
+        </form>
+
+        <!-- Divider -->
+        <div class="relative my-6">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-neutral-800"></div></div>
+          <div class="relative flex justify-center text-[10px] font-mono uppercase"><span class="bg-brand-cardDark px-3 text-neutral-500">Quick Template Demos</span></div>
+        </div>
+
+        <!-- Direct Demo -->
+        <div class="mt-4">
+          <a id="demoBtn" href="customer-dashboard.html" class="flex items-center justify-center gap-2 w-full py-2.5 bg-neutral-900 border border-neutral-800 rounded-xl text-xs font-semibold text-neutral-300 hover:text-white hover:border-brand-red transition-colors">
+            <i data-lucide="external-link" class="w-4 h-4"></i> <span id="demoText">Direct Login (Customer Demo)</span>
+          </a>
+        </div>
+        
+
+
+        <!-- Create Account Link -->
+        <p class="text-center text-xs text-neutral-400 mt-6">
+          Don't have an account? <a href="signup.html" class="text-brand-red font-bold hover:underline">Create Account</a>
+        </p>
+
+      </div>
+
+    </div>
+  </main>
+
+  
+
+    <script>
+    function switchLoginMode(mode) {
+      const tabCustomer = document.getElementById('tabCustomer');
+      const tabAdmin = document.getElementById('tabAdmin');
+      const title = document.getElementById('loginTitle');
+      const desc = document.getElementById('loginDesc');
+      const form = document.getElementById('loginForm');
+
+      const demoBtn = document.getElementById('demoBtn');
+      const demoText = document.getElementById('demoText');
+
+      if (mode === 'admin') {
+        tabAdmin.classList.add('bg-brand-red', 'text-white', 'shadow-lg');
+        tabAdmin.classList.remove('text-neutral-400', 'hover:text-white');
+        
+        tabCustomer.classList.remove('bg-brand-red', 'text-white', 'shadow-lg');
+        tabCustomer.classList.add('text-neutral-400', 'hover:text-white');
+        
+        title.innerText = 'Admin Portal';
+        desc.innerText = 'Log in to access the management dashboard and queue.';
+        form.action = 'dashboard.html';
+        
+        if (demoBtn && demoText) {
+          demoBtn.href = 'dashboard.html';
+          demoText.innerText = 'Direct Login (Admin Demo)';
+        }
+      } else {
+        tabCustomer.classList.add('bg-brand-red', 'text-white', 'shadow-lg');
+        tabCustomer.classList.remove('text-neutral-400', 'hover:text-white');
+        
+        tabAdmin.classList.remove('bg-brand-red', 'text-white', 'shadow-lg');
+        tabAdmin.classList.add('text-neutral-400', 'hover:text-white');
+        
+        title.innerText = 'Welcome Back';
+        desc.innerText = 'Log in to manage appointments and view vehicle service history.';
+        form.action = 'customer-dashboard.html';
+        
+        if (demoBtn && demoText) {
+          demoBtn.href = 'customer-dashboard.html';
+          demoText.innerText = 'Direct Login (Customer Demo)';
+        }
+      }
+    }
+  </script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

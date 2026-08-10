@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Apex Auto Care</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              charcoal: '#0b0d12',
+              cardDark: '#121620',
+              red: '#e52323',
+              redHover: '#cc1e1e'
+            }
+          },
+          fontFamily: {
+            serif: ['Oswald', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('apexTheme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const savedRTL = localStorage.getItem('apexRTL');
+      if (savedRTL === 'true') {
+        document.documentElement.dir = 'rtl';
+      } else {
+        document.documentElement.dir = 'ltr';
+      }
+    })();
+  </script>
+</head>
+<body class="min-h-screen bg-neutral-50 dark:bg-brand-charcoal text-neutral-900 dark:text-neutral-100 font-sans selection:bg-brand-red selection:text-white overflow-x-hidden">
+
+  <!-- =================================================================== -->
+    <!-- SLIDE 2: ADMIN PORTAL DASHBOARD                                     -->
+    <!-- =================================================================== -->
+    <section class="w-screen min-h-screen flex shrink-0 bg-white dark:bg-brand-charcoal">
+      
+      <!-- SIDEBAR NAVIGATION -->
+      <div id="dashboard-overlay" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm" onclick="toggleDashboardSidebar()"></div>
+      <aside id="dashboard-sidebar" class="w-64 border-r border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-brand-charcoal flex flex-col justify-between shrink-0 absolute md:relative z-50 h-full transition-transform duration-300 -translate-x-full md:translate-x-0">
+        <div class="p-6">
+          <a href="index.html" class="flex items-center gap-3 group mb-8">
+            <div class="w-9 h-9 bg-brand-red text-brand-charcoal dark:text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-xl font-extrabold uppercase tracking-wider text-brand-charcoal dark:text-white leading-none">Apex Admin</span>
+              <span class="text-[8px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold mt-1">Management Hub</span>
+            </div>
+          </a>
+
+          <!-- FUNCTIONAL BUTTONS -->
+          <nav class="space-y-2 font-semibold text-xs">
+            <button id="navOverview" onclick="switchSection('overview')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-active">
+              <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Overview
+            </button>
+            
+            <button id="navBays" onclick="switchSection('bays')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive">
+              <i data-lucide="cpu" class="w-4 h-4"></i> Live Express Bays
+            </button>
+            
+            <button id="navBookings" onclick="switchSection('bookings')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive">
+              <i data-lucide="calendar" class="w-4 h-4"></i> Bookings Queue
+            </button>
+          </nav>
+        </div>
+
+        <div class="p-4 border-t border-neutral-200 dark:border-neutral-800">
+          <a href="login.html" class="w-full bg-brand-red/10 hover:bg-brand-red hover:text-white border border-brand-red/30 text-brand-red p-3 rounded-xl flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider transition-all">
+            <i data-lucide="log-out" class="w-4 h-4"></i> Sign Out
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN PORTAL CONTAINER -->
+      <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        <header class="h-20 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-brand-charcoal/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+          <div class="flex items-center gap-2 sm:gap-4">
+            <button type="button" class="md:hidden p-2 -ml-2 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors" onclick="toggleDashboardSidebar()">
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+            <h2 id="portalHeaderTitle" class="font-serif text-xl sm:text-2xl font-bold uppercase text-brand-charcoal dark:text-white tracking-wider">Overview Dashboard</h2>
+            <span class="hidden lg:flex text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Systems Live
+            </span>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 rounded-lg flex items-center justify-center ">
+              <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+              <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+            </button>
+            <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 rounded-lg flex items-center justify-center ">
+              <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+            </button>
+            <button class="relative p-2 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors">
+              <i data-lucide="bell" class="w-5 h-5"></i>
+              <span class="absolute top-1 right-1 w-2 h-2 bg-brand-red rounded-full"></span>
+            </button>
+            
+          </div>
+        </header>
+
+        <main class="p-6 sm:p-8 space-y-8 max-w-7xl">
+          
+          <!-- SECTION 1: OVERVIEW PANEL -->
+          <div id="sectionOverview" class="space-y-8">
+            <!-- STATS CARDS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">Today's Revenue</span>
+                  <h3 class="font-serif text-2xl font-bold text-brand-charcoal dark:text-white mt-1">$3,840.00</h3>
+                  <span class="text-[10px] text-emerald-400 font-bold">+14% vs yesterday</span>
+                </div>
+                <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center">
+                  <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">Vehicles Serviced</span>
+                  <h3 class="font-serif text-2xl font-bold text-brand-charcoal dark:text-white mt-1">28 Cars</h3>
+                  <span class="text-[10px] text-neutral-500 dark:text-neutral-400">8 in Express Bays</span>
+                </div>
+                <div class="w-12 h-12 bg-brand-red/10 border border-brand-red/20 text-brand-red rounded-xl flex items-center justify-center">
+                  <i data-lucide="car" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">Active Bay Occupancy</span>
+                  <h3 class="font-serif text-2xl font-bold text-brand-charcoal dark:text-white mt-1">4 / 4 Bays</h3>
+                  <span class="text-[10px] text-brand-red font-bold">100% Full Capacity</span>
+                </div>
+                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center">
+                  <i data-lucide="activity" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">Pending Appointments</span>
+                  <h3 class="font-serif text-2xl font-bold text-brand-charcoal dark:text-white mt-1">12 Slots</h3>
+                  <span class="text-[10px] text-neutral-500 dark:text-neutral-400">Next at 05:00 PM</span>
+                </div>
+                <div class="w-12 h-12 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center">
+                  <i data-lucide="clock" class="w-6 h-6"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: LIVE BAYS MONITOR -->
+          <section id="sectionBays" class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <i data-lucide="cpu" class="w-5 h-5 text-brand-red"></i>
+                <h3 class="font-serif text-xl font-bold uppercase text-brand-charcoal dark:text-white">Live Express Bays Monitor</h3>
+              </div>
+              <button onclick="alert('Bay statuses refreshed!')" class="px-3 py-1.5 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-mono text-neutral-600 dark:text-neutral-300 hover:text-brand-charcoal dark:hover:text-white">Refresh Bays</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-neutral-100 dark:bg-neutral-900 border border-brand-red/40 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-brand-charcoal dark:text-white">BAY 01</span>
+                  <span class="text-[10px] font-mono bg-brand-red/10 border border-brand-red/30 text-brand-red px-2.5 py-0.5 rounded-full uppercase">In Service</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-brand-charcoal dark:text-white">2022 BMW M3 Competition</p>
+                  <p class="text-[11px] text-neutral-500 dark:text-neutral-400">Full Euro Protection Oil Swap</p>
+                </div>
+                <div class="w-full bg-neutral-200 dark:bg-neutral-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-brand-red h-full w-3/4"></div>
+                </div>
+              </div>
+
+              <div class="bg-neutral-100 dark:bg-neutral-900 border border-brand-red/40 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-brand-charcoal dark:text-white">BAY 02</span>
+                  <span class="text-[10px] font-mono bg-brand-red/10 border border-brand-red/30 text-brand-red px-2.5 py-0.5 rounded-full uppercase">In Service</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-brand-charcoal dark:text-white">2020 Porsche 911 GT3</p>
+                  <p class="text-[11px] text-neutral-500 dark:text-neutral-400">Synthetic Fluid Swap & Filter</p>
+                </div>
+                <div class="w-full bg-neutral-200 dark:bg-neutral-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-amber-500 h-full w-2/5"></div>
+                </div>
+              </div>
+
+              <div class="bg-neutral-100 dark:bg-neutral-900 border border-emerald-500/40 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-brand-charcoal dark:text-white">BAY 03</span>
+                  <span class="text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2.5 py-0.5 rounded-full uppercase">Inspection</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-brand-charcoal dark:text-white">2021 Ford F-150 Lariat</p>
+                  <p class="text-[11px] text-neutral-500 dark:text-neutral-400">Express Oil + Brake Check</p>
+                </div>
+                <div class="w-full bg-neutral-200 dark:bg-neutral-800 h-2 rounded-full overflow-hidden">
+                  <div class="bg-emerald-500 h-full w-full"></div>
+                </div>
+              </div>
+
+              <div class="bg-neutral-100 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-serif font-bold text-brand-charcoal dark:text-white">BAY 04</span>
+                  <span class="text-[10px] font-mono bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 px-2.5 py-0.5 rounded-full uppercase">Staging</span>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-brand-charcoal dark:text-white">2023 Audi RS6 Avant</p>
+                  <p class="text-[11px] text-neutral-500 dark:text-neutral-400">Scheduled for 05:15 PM</p>
+                </div>
+                <div class="w-full bg-neutral-200 dark:bg-neutral-800 h-2 rounded-full"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 3: BOOKINGS QUEUE -->
+          <section id="sectionBookings" class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6" style="display: none;">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <i data-lucide="calendar" class="w-5 h-5 text-brand-red"></i>
+                <h3 class="font-serif text-xl font-bold uppercase text-brand-charcoal dark:text-white">Upcoming Bookings</h3>
+              </div>
+              <button onclick="alert('Exporting bookings to CSV...')" class="px-3 py-1.5 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-mono text-neutral-600 dark:text-neutral-300 hover:text-brand-charcoal dark:hover:text-white flex items-center gap-2">
+                <i data-lucide="download" class="w-3 h-3"></i> Export
+              </button>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 text-[10px] font-mono uppercase tracking-wider text-neutral-500">
+                    <th class="p-4 font-semibold">Customer & Vehicle</th>
+                    <th class="p-4 font-semibold">Requested Service</th>
+                    <th class="p-4 font-semibold">Date & Time</th>
+                    <th class="p-4 font-semibold">Status</th>
+                    <th class="p-4 font-semibold text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                  <tr class="bg-white dark:bg-brand-cardDark hover:bg-neutral-100 dark:bg-neutral-900/50 transition-colors group">
+                    <td class="p-4">
+                      <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded bg-brand-red/10 text-brand-red flex items-center justify-center font-bold text-xs">JD</div>
+                        <div>
+                          <p class="text-sm font-bold text-brand-charcoal dark:text-white">John Doe</p>
+                          <p class="text-[11px] text-neutral-500 dark:text-neutral-400">2018 Toyota Camry</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Premium Oil Change</p>
+                      <p class="text-[11px] text-neutral-500">Synthetic, 5W-30</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-brand-charcoal dark:text-white">Today</p>
+                      <p class="text-[11px] text-neutral-500 dark:text-neutral-400">02:30 PM</p>
+                    </td>
+                    <td class="p-4">
+                      <span class="inline-block px-2.5 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-mono uppercase rounded-full">Pending</span>
+                    </td>
+                    <td class="p-4 text-right">
+                      <button class="text-neutral-500 hover:text-brand-red transition-colors"><i data-lucide="more-horizontal" class="w-5 h-5"></i></button>
+                    </td>
+                  </tr>
+                  
+                  <tr class="bg-white dark:bg-brand-cardDark hover:bg-neutral-100 dark:bg-neutral-900/50 transition-colors group">
+                    <td class="p-4">
+                      <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs">SM</div>
+                        <div>
+                          <p class="text-sm font-bold text-brand-charcoal dark:text-white">Sarah Miller</p>
+                          <p class="text-[11px] text-neutral-500 dark:text-neutral-400">2021 Honda CR-V</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Brake Pad Replacement</p>
+                      <p class="text-[11px] text-neutral-500">Front Axle Only</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-brand-charcoal dark:text-white">Tomorrow</p>
+                      <p class="text-[11px] text-neutral-500 dark:text-neutral-400">09:00 AM</p>
+                    </td>
+                    <td class="p-4">
+                      <span class="inline-block px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono uppercase rounded-full">Confirmed</span>
+                    </td>
+                    <td class="p-4 text-right">
+                      <button class="text-neutral-500 hover:text-brand-red transition-colors"><i data-lucide="more-horizontal" class="w-5 h-5"></i></button>
+                    </td>
+                  </tr>
+
+                  <tr class="bg-white dark:bg-brand-cardDark hover:bg-neutral-100 dark:bg-neutral-900/50 transition-colors group">
+                    <td class="p-4">
+                      <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-xs">RT</div>
+                        <div>
+                          <p class="text-sm font-bold text-brand-charcoal dark:text-white">Robert Taylor</p>
+                          <p class="text-[11px] text-neutral-500 dark:text-neutral-400">2019 Ford F-150</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Full Diagnostic</p>
+                      <p class="text-[11px] text-neutral-500">Check Engine Light On</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-brand-charcoal dark:text-white">Aug 12</p>
+                      <p class="text-[11px] text-neutral-500 dark:text-neutral-400">11:15 AM</p>
+                    </td>
+                    <td class="p-4">
+                      <span class="inline-block px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono uppercase rounded-full">Confirmed</span>
+                    </td>
+                    <td class="p-4 text-right">
+                      <button class="text-neutral-500 hover:text-brand-red transition-colors"><i data-lucide="more-horizontal" class="w-5 h-5"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Dashboard Logic
+    function toggleDashboardSidebar() {
+      const sidebar = document.getElementById('dashboard-sidebar');
+      const overlay = document.getElementById('dashboard-overlay');
+      
+      if (sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function switchSection(sectionId) {
+      // Very simple simulation for the template
+      document.getElementById('sectionOverview').style.display = (sectionId === 'overview') ? 'block' : 'none';
+      document.getElementById('sectionBays').style.display = (sectionId === 'bays') ? 'block' : 'none';
+      document.getElementById('sectionBookings').style.display = (sectionId === 'bookings') ? 'block' : 'none';
+      
+      // Update sidebar nav active state
+      const navs = ['navOverview', 'navBays', 'navBookings'];
+      navs.forEach(nav => {
+        const btn = document.getElementById(nav);
+        if(btn) {
+          btn.classList.remove('nav-btn-active', 'nav-btn-inactive');
+          btn.classList.add('nav-btn-inactive');
+        }
+      });
+      
+      const activeBtn = document.getElementById('nav' + sectionId.charAt(0).toUpperCase() + sectionId.slice(1));
+      if(activeBtn) {
+        activeBtn.classList.remove('nav-btn-inactive');
+        activeBtn.classList.add('nav-btn-active');
+      }
+
+      // Close sidebar on mobile after clicking
+      if(window.innerWidth < 768) {
+         toggleDashboardSidebar();
+      }
+    }
+
+    // Initialize to hide bays
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('sectionBays').style.display = 'none';
+    });
+  </script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

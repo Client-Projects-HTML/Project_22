@@ -36,6 +36,14 @@
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
 </head>
 <body class="min-h-screen flex flex-col bg-brand-charcoal text-neutral-100 transition-colors duration-300 font-sans selection:bg-brand-red selection:text-white">
 
@@ -50,8 +58,8 @@
             <i data-lucide="wrench" class="w-5 h-5"></i>
           </div>
           <div class="flex flex-col">
-            <span class="font-serif text-2xl font-extrabold uppercase tracking-wider text-white leading-none">Apex Auto</span>
-            <span class="text-[9px] tracking-[0.25em] text-neutral-400 uppercase font-semibold mt-1">Care & Oil Change</span>
+            <span class="font-serif text-2xl font-extrabold uppercase tracking-wider text-white leading-none">AutoCare</span>
+            <span class="text-[9px] tracking-[0.25em] text-neutral-400 uppercase font-semibold mt-1">Service Center</span>
           </div>
         </a>
 
@@ -75,12 +83,10 @@
           <!-- 3. Services -->
           <a href="services.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Services</a>
 
-          <a href="pricing.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Packages & Pricing</a>
+          <a href="pricing.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Pricing</a>
           <a href="gallery.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Our Shop</a>
           <a href="contact.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Contact</a>
-          <a href="dashboard.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors flex items-center gap-1 font-medium">
-            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Admin
-          </a>
+          
         </nav>
         <!-- Right Action Controls -->
         <div class="hidden lg:flex items-center gap-3">
@@ -102,7 +108,14 @@
 
         <!-- Mobile Controls -->
         <div class="flex items-center gap-2 lg:hidden">
-          <button type="button" id="mobile-menu-btn" class="w-10 h-10 flex items-center justify-center border border-neutral-800 rounded-lg text-white">
+          <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+            <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+            <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+          </button>
+          <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+          </button>
+          <button type="button" id="mobile-menu-btn" class="w-9 h-9 flex items-center justify-center border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
         </div>
@@ -110,6 +123,30 @@
       </div>
     </div>
   </header>
+  <!-- MOBILE DRAWER -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-50 hidden backdrop-blur-sm"></div>
+  <div id="mobile-menu-drawer" class="fixed top-0 right-0 w-72 h-full bg-white dark:bg-neutral-900 z-50 hidden flex-col justify-between p-6 shadow-2xl">
+    <div>
+      <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800">
+        <span class="font-serif font-bold text-lg text-brand-charcoal dark:text-white">APEX AUTO CARE</span>
+        <button type="button" id="mobile-menu-close" class="p-1 text-neutral-700 dark:text-neutral-300"><i data-lucide="x" class="w-6 h-6"></i></button>
+      </div>
+      <nav class="flex flex-col gap-1 mt-6">
+        <a href="index.html" class="font-semibold text-brand-red hover:text-brand-red transition-colors block py-2">Home (Classic)</a>
+        <a href="home-premium.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Home (Premium)</a>
+        <a href="about.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">About Us</a>
+        <a href="services.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Services</a>
+        <a href="pricing.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Pricing</a>
+        <a href="gallery.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Our Shop</a>
+        <a href="contact.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Contact</a>
+      </nav>
+    </div>
+    <div class="pt-6 border-t border-neutral-200 dark:border-neutral-800">
+      <a href="login.html" class="w-full flex items-center justify-center py-3 mb-3 border border-brand-red text-brand-red rounded-lg font-bold uppercase tracking-wider text-xs text-center transition-colors hover:bg-brand-red/10">Sign In</a>
+      <a href="booking.html" class="w-full flex items-center justify-center py-3 bg-brand-red text-white rounded-lg font-bold uppercase tracking-wider text-xs text-center shadow-lg shadow-brand-red/25 hover:bg-red-700 transition-colors">Book Appointment</a>
+    </div>
+  </div>
+
 
   <!-- MAIN CONTENT -->
   <main class="flex-1 pt-20">
@@ -273,11 +310,9 @@
 
 
 
-  <script>
-    lucide.createIcons();
-  </script>
+  <script src="../assets/js/main.js"></script>
 <!-- FOOTER -->
-  <footer class="bg-neutral-950 text-neutral-300 border-t border-neutral-800 pt-16 pb-8">
+  <footer class="bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-300 border-t border-neutral-200 dark:border-neutral-800 pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Top 4-Column Grid -->
@@ -290,8 +325,8 @@
               <i data-lucide="wrench" class="w-5 h-5"></i>
             </div>
             <div class="flex flex-col">
-              <span class="font-serif text-xl font-bold uppercase text-white tracking-wider">Apex Auto</span>
-              <span class="text-[10px] tracking-[0.2em] text-neutral-400 uppercase font-semibold">Care & Oil Change</span>
+              <span class="font-serif text-xl font-bold uppercase text-white tracking-wider">AutoCare</span>
+              <span class="text-[10px] tracking-[0.2em] text-neutral-400 uppercase font-semibold">Service Center</span>
             </div>
           </div>
 
@@ -302,19 +337,19 @@
           <!-- INLINE SVG SOCIAL ICONS (VISIBLE & RENDERED) -->
           <div class="flex items-center gap-3 pt-2">
             <!-- Instagram -->
-            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Instagram">
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Instagram">
               <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
             <!-- Facebook -->
-            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Facebook">
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Facebook">
               <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
             </a>
             <!-- YouTube -->
-            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="YouTube">
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="YouTube">
               <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
             </a>
             <!-- Twitter / X -->
-            <a href="#" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Twitter">
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-800 bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white hover:border-brand-red transition-colors" aria-label="Twitter">
               <svg class="w-4 h-4 fill-current text-neutral-300" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
@@ -333,8 +368,8 @@
             <li><a href="contact.html" class="hover:text-brand-red transition-colors">Contact Us</a></li>
             <li><a href="booking.html" class="hover:text-brand-red transition-colors">Check Availability</a></li>
             <!-- Inside Column 2: Quick Links -->
-<li><a href="404.html" class="hover:text-brand-red transition-colors">404 Error Page</a></li>
-<li><a href="coming-soon.html" class="hover:text-brand-red transition-colors">Coming Soon</a></li>
+<li><a href="404.html" class="hover:text-brand-red transition-colors">Privacy Policy</a></li>
+<li><a href="coming-soon.html" class="hover:text-brand-red transition-colors">Careers</a></li>
           </ul>
         </div>
 
@@ -387,8 +422,8 @@
         </div>
         <div class="flex items-center gap-6">
           <a href="dashboard.html" class="hover:text-brand-red">Client Portal</a>
-          <a href="#" class="hover:text-brand-red">Privacy Policy</a>
-          <a href="#" class="hover:text-brand-red">Terms & Conditions</a>
+          <a href="javascript:void(0)" class="hover:text-brand-red">Privacy Policy</a>
+          <a href="javascript:void(0)" class="hover:text-brand-red">Terms & Conditions</a>
         </div>
       </div>
 
@@ -396,69 +431,7 @@
   </footer>
 
   <!-- JS -->
-  <script>
-    lucide.createIcons();
-
-    // Theme and RTL Toggles
-    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('apexTheme', isDark ? 'dark' : 'light');
-      });
-    });
-
-    document.querySelectorAll('.rtl-toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const isRTL = document.documentElement.dir === 'rtl';
-        document.documentElement.dir = isRTL ? 'ltr' : 'rtl';
-        localStorage.setItem('apexRTL', !isRTL);
-      });
-    });
-
-    // Mobile Menu
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const menuClose = document.getElementById('mobile-menu-close');
-    const menuDrawer = document.getElementById('mobile-menu-drawer');
-    const menuOverlay = document.getElementById('mobile-menu-overlay');
-
-    if(menuBtn) menuBtn.addEventListener('click', () => {
-      menuOverlay.classList.remove('hidden');
-      menuDrawer.classList.remove('hidden');
-      menuDrawer.classList.add('flex');
-    });
-
-    const closeMenu = () => {
-      menuOverlay.classList.add('hidden');
-      menuDrawer.classList.add('hidden');
-      menuDrawer.classList.remove('flex');
-    };
-
-    if(menuClose) menuClose.addEventListener('click', closeMenu);
-    if(menuOverlay) menuOverlay.addEventListener('click', closeMenu);
-
-    // Gallery Filters
-    document.querySelectorAll('.portfolio-filter-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const filter = button.getAttribute('data-filter');
-
-        document.querySelectorAll('.portfolio-filter-btn').forEach(btn => {
-          btn.classList.remove('bg-brand-red', 'text-white');
-          btn.classList.add('bg-neutral-200', 'dark:bg-neutral-800', 'text-neutral-700', 'dark:text-neutral-300');
-        });
-
-        button.classList.remove('bg-neutral-200', 'dark:bg-neutral-800', 'text-neutral-700', 'dark:text-neutral-300');
-        button.classList.add('bg-brand-red', 'text-white');
-
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-          if (filter === 'all' || item.getAttribute('data-category') === filter) {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
+  <script src="../assets/js/main.js"></script>
 
 
 

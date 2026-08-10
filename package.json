@@ -1,0 +1,25 @@
+{
+  "name": "project_22",
+  "version": "1.0.0",
+  "description": "A modern, responsive, multi-purpose HTML template designed for service-based businesses, auto repair shops, and mechanics.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Client-Projects-HTML/Project_22.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Client-Projects-HTML/Project_22/issues"
+  },
+  "homepage": "https://github.com/Client-Projects-HTML/Project_22#readme",
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1"
+  }
+}

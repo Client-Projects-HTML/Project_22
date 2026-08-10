@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Dashboard - Apex Auto Care</title>
+  <meta name="description" content="View your vehicle service history, track upcoming maintenance, and book appointments." />
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#DC2626',
+              redHover: '#B91C1C',
+              charcoal: '#111111',
+              cardDark: '#1A1A1A'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            serif: ['Outfit', 'ui-serif', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('apexTheme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const savedRTL = localStorage.getItem('apexRTL');
+      if (savedRTL === 'true') {
+        document.documentElement.dir = 'rtl';
+      } else {
+        document.documentElement.dir = 'ltr';
+      }
+    })();
+  </script>
+</head>
+<body class="min-h-screen bg-neutral-50 dark:bg-brand-charcoal text-neutral-900 dark:text-neutral-100 font-sans selection:bg-brand-red selection:text-white overflow-x-hidden">
+
+    <section class="w-screen min-h-screen flex shrink-0 bg-white dark:bg-brand-charcoal">
+      
+      <!-- Mobile Overlay -->
+      <div id="dashboard-overlay" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm" onclick="toggleDashboardSidebar()"></div>
+      
+      <!-- SIDEBAR NAVIGATION -->
+      <aside id="dashboard-sidebar" class="w-64 border-r border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-brand-charcoal flex flex-col justify-between shrink-0 absolute md:relative z-50 h-full transition-transform duration-300 -translate-x-full md:translate-x-0">
+        <div class="p-6">
+          <a href="index.html" class="flex items-center gap-3 group mb-8">
+            <div class="w-9 h-9 bg-brand-red text-brand-charcoal dark:text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
+              <i data-lucide="user" class="w-5 h-5"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-xl font-extrabold uppercase tracking-wider text-brand-charcoal dark:text-white leading-none">My Garage</span>
+              <span class="text-[8px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold mt-1">Customer Portal</span>
+            </div>
+          </a>
+
+          <!-- FUNCTIONAL BUTTONS -->
+          <nav class="space-y-2 font-semibold text-xs">
+            <button id="navOverview" onclick="switchSection('overview')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-active">
+              <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+            </button>
+            
+            <button id="navHistory" onclick="switchSection('history')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive">
+              <i data-lucide="file-clock" class="w-4 h-4"></i> Service History
+            </button>
+            
+            <a href="booking.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive hover:bg-neutral-200 dark:bg-neutral-800">
+              <i data-lucide="calendar-plus" class="w-4 h-4"></i> Book Appointment
+            </a>
+          </nav>
+        </div>
+
+        <div class="p-4 border-t border-neutral-200 dark:border-neutral-800">
+          <div class="flex items-center gap-3 px-2 py-4 mb-2">
+            <div class="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center border border-neutral-200 dark:border-neutral-800">
+              <span class="font-serif font-bold text-brand-charcoal dark:text-white text-sm">JD</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold text-brand-charcoal dark:text-white truncate">John Doe</p>
+              <p class="text-[10px] text-neutral-500 dark:text-neutral-400 truncate">Premium Member</p>
+            </div>
+          </div>
+          <a href="login.html" class="w-full bg-brand-red/10 hover:bg-brand-red hover:text-white border border-brand-red/30 text-brand-red p-3 rounded-xl flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider transition-all">
+            <i data-lucide="log-out" class="w-4 h-4"></i> Sign Out
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN PORTAL CONTAINER -->
+      <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        <header class="h-20 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-brand-charcoal/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+          <div class="flex items-center gap-2 sm:gap-4">
+            <button type="button" class="md:hidden p-2 -ml-2 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors" onclick="toggleDashboardSidebar()">
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+            <h2 id="portalHeaderTitle" class="font-serif text-xl sm:text-2xl font-bold uppercase text-brand-charcoal dark:text-white tracking-wider">Customer Portal</h2>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <a href="index.html" class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors hidden sm:block">Back to Website</a>
+            <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 rounded-lg flex items-center justify-center ">
+              <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+              <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+            </button>
+            <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 rounded-lg flex items-center justify-center ">
+              <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+            </button>
+            <button class="relative p-2 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors">
+              <i data-lucide="bell" class="w-5 h-5"></i>
+              <span class="absolute top-1 right-1 w-2 h-2 bg-amber-500 rounded-full"></span>
+            </button>
+            
+          </div>
+        </header>
+
+        <main class="p-6 sm:p-8 space-y-8 max-w-7xl">
+          
+          <!-- SECTION 1: OVERVIEW PANEL -->
+          <div id="sectionOverview" class="space-y-8">
+            
+            <!-- MAINTENANCE REMINDERS -->
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-amber-500/20 text-amber-500 rounded-xl flex items-center justify-center shrink-0">
+                  <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h3 class="text-brand-charcoal dark:text-white font-serif font-bold text-lg">Maintenance Due Soon</h3>
+                  <p class="text-neutral-600 dark:text-neutral-300 text-sm mt-1">Your <strong>2018 Toyota Camry</strong> is due for a Full Synthetic Oil Change in <strong>500 miles</strong>.</p>
+                </div>
+              </div>
+              <a href="booking.html" class="px-5 py-2.5 bg-amber-500 text-brand-charcoal hover:bg-amber-400 rounded-lg text-xs font-bold uppercase tracking-wider shrink-0 transition-colors">
+                Book Now
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              
+              <!-- MY VEHICLES -->
+              <div class="lg:col-span-1 bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6">
+                <div class="flex items-center justify-between mb-6">
+                  <h3 class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">My Vehicles</h3>
+                  <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase"><i data-lucide="plus" class="w-4 h-4"></i></button>
+                </div>
+                
+                <div class="space-y-4">
+                  <div class="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-neutral-500 dark:text-neutral-400">
+                      <i data-lucide="car" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-brand-charcoal dark:text-white font-bold text-sm">2018 Toyota Camry</h4>
+                      <p class="text-xs text-neutral-500">License: XYZ-1234</p>
+                    </div>
+                  </div>
+                  
+                  <div class="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-neutral-500 dark:text-neutral-400">
+                      <i data-lucide="truck" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-brand-charcoal dark:text-white font-bold text-sm">2021 Ford F-150</h4>
+                      <p class="text-xs text-neutral-500">License: ABC-9876</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- UPCOMING APPOINTMENTS -->
+              <div class="lg:col-span-2 bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6">
+                <div class="flex items-center justify-between mb-6">
+                  <h3 class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">Upcoming Appointments</h3>
+                  <a href="booking.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white text-xs font-mono uppercase tracking-wider">Schedule New</a>
+                </div>
+                
+                <div class="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden">
+                  <table class="w-full text-left border-collapse">
+                    <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                      <tr class="hover:bg-neutral-200 dark:bg-neutral-800/50 transition-colors">
+                        <td class="p-4 align-top">
+                          <div class="bg-brand-red/10 text-brand-red rounded-lg p-2 text-center w-14">
+                            <span class="block text-xs font-bold uppercase">Aug</span>
+                            <span class="block text-lg font-serif font-bold">14</span>
+                          </div>
+                        </td>
+                        <td class="p-4 align-top">
+                          <p class="text-sm font-bold text-brand-charcoal dark:text-white mb-1">Brake Pad Replacement</p>
+                          <p class="text-xs text-neutral-500 dark:text-neutral-400">2021 Ford F-150</p>
+                        </td>
+                        <td class="p-4 align-top hidden sm:table-cell">
+                          <p class="text-sm text-neutral-600 dark:text-neutral-300">09:00 AM - 11:00 AM</p>
+                          <p class="text-[11px] font-mono text-emerald-400 mt-1 uppercase">Confirmed</p>
+                        </td>
+                        <td class="p-4 align-top text-right">
+                          <button class="px-3 py-1.5 border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white hover:border-neutral-500 rounded text-xs font-semibold transition-colors">Reschedule</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="mt-4 flex items-center justify-between bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4 rounded-2xl">
+                  <div class="flex items-center gap-3 text-neutral-500 dark:text-neutral-400">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
+                    <p class="text-sm">Your vehicle is up to date on active recalls.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: SERVICE HISTORY -->
+          <section id="sectionHistory" class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6" style="display: none;">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <i data-lucide="file-clock" class="w-5 h-5 text-brand-red"></i>
+                <h3 class="font-serif text-xl font-bold uppercase text-brand-charcoal dark:text-white">Service History</h3>
+              </div>
+              <button class="px-3 py-1.5 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-mono text-neutral-600 dark:text-neutral-300 hover:text-brand-charcoal dark:hover:text-white flex items-center gap-2">
+                <i data-lucide="download" class="w-3 h-3"></i> Invoices
+              </button>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 text-[10px] font-mono uppercase tracking-wider text-neutral-500">
+                    <th class="p-4 font-semibold">Date</th>
+                    <th class="p-4 font-semibold">Vehicle</th>
+                    <th class="p-4 font-semibold">Service Details</th>
+                    <th class="p-4 font-semibold">Mileage</th>
+                    <th class="p-4 font-semibold">Cost</th>
+                    <th class="p-4 font-semibold text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                  <tr class="bg-white dark:bg-brand-cardDark hover:bg-neutral-100 dark:bg-neutral-900/50 transition-colors group">
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-brand-charcoal dark:text-white">Mar 12, 2026</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">2018 Toyota Camry</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Full Synthetic Oil Change</p>
+                      <p class="text-[11px] text-neutral-500">Multi-point inspection included</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm text-neutral-500 dark:text-neutral-400 font-mono">42,500 mi</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-bold text-brand-charcoal dark:text-white">$69.99</p>
+                    </td>
+                    <td class="p-4 text-right">
+                      <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
+                    </td>
+                  </tr>
+
+                  <tr class="bg-white dark:bg-brand-cardDark hover:bg-neutral-100 dark:bg-neutral-900/50 transition-colors group">
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-brand-charcoal dark:text-white">Oct 05, 2025</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">2018 Toyota Camry</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Tire Rotation & Alignment</p>
+                      <p class="text-[11px] text-neutral-500">Balanced all 4 wheels</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm text-neutral-500 dark:text-neutral-400 font-mono">36,120 mi</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-bold text-brand-charcoal dark:text-white">$120.00</p>
+                    </td>
+                    <td class="p-4 text-right">
+                      <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
+                    </td>
+                  </tr>
+
+                  <tr class="bg-white dark:bg-brand-cardDark hover:bg-neutral-100 dark:bg-neutral-900/50 transition-colors group">
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-brand-charcoal dark:text-white">Jun 18, 2025</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">2021 Ford F-150</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Annual Diagnostic Check</p>
+                      <p class="text-[11px] text-neutral-500">Fluid top-offs</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm text-neutral-500 dark:text-neutral-400 font-mono">22,000 mi</p>
+                    </td>
+                    <td class="p-4">
+                      <p class="text-sm font-bold text-brand-charcoal dark:text-white">$45.00</p>
+                    </td>
+                    <td class="p-4 text-right">
+                      <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </section>
+
+  <script>
+    // Dashboard Logic
+    function toggleDashboardSidebar() {
+      const sidebar = document.getElementById('dashboard-sidebar');
+      const overlay = document.getElementById('dashboard-overlay');
+      
+      if (sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function switchSection(sectionId) {
+      document.getElementById('sectionOverview').style.display = (sectionId === 'overview') ? 'block' : 'none';
+      document.getElementById('sectionHistory').style.display = (sectionId === 'history') ? 'block' : 'none';
+      
+      // Update sidebar nav active state
+      const navs = ['navOverview', 'navHistory'];
+      navs.forEach(nav => {
+        const btn = document.getElementById(nav);
+        if(btn) {
+          btn.classList.remove('nav-btn-active', 'nav-btn-inactive');
+          btn.classList.add('nav-btn-inactive');
+        }
+      });
+      
+      const activeBtn = document.getElementById('nav' + sectionId.charAt(0).toUpperCase() + sectionId.slice(1));
+      if(activeBtn) {
+        activeBtn.classList.remove('nav-btn-inactive');
+        activeBtn.classList.add('nav-btn-active');
+      }
+
+      // Close sidebar on mobile after clicking
+      if(window.innerWidth < 768) {
+         toggleDashboardSidebar();
+      }
+    }
+  </script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

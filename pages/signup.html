@@ -36,58 +36,26 @@
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
 </head>
 <body class="min-h-screen flex flex-col bg-brand-charcoal text-neutral-100 transition-colors duration-300 font-sans selection:bg-brand-red selection:text-white">
 
-  <!-- UNIFIED NAVBAR -->
-  <header class="fixed top-0 left-0 right-0 z-50 border-b border-neutral-800/80 bg-brand-charcoal/95 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        
-        <!-- Brand Logo -->
-        <a href="index.html" class="flex items-center gap-3 shrink-0 group">
-          <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
-            <i data-lucide="wrench" class="w-5 h-5"></i>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-serif text-2xl font-extrabold uppercase tracking-wider text-white leading-none">Apex Auto</span>
-            <span class="text-[9px] tracking-[0.25em] text-neutral-400 uppercase font-semibold mt-1">Care & Oil Change</span>
-          </div>
-        </a>
-
-        <!-- Desktop Navigation Links -->
-        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
-          <a href="index.html" class="text-neutral-300 hover:text-white transition-colors">Home</a>
-          <a href="services.html" class="text-neutral-300 hover:text-white transition-colors">Services</a>
-          <a href="express-bays.html" class="text-neutral-300 hover:text-white transition-colors">Express Bays</a>
-          <a href="pricing.html" class="text-neutral-300 hover:text-white transition-colors">Packages & Pricing</a>
-          <a href="gallery.html" class="text-neutral-300 hover:text-white transition-colors">Our Shop</a>
-          <a href="contact.html" class="text-neutral-300 hover:text-white transition-colors">Contact</a>
-        </nav>
-
-        <!-- Right Action Controls -->
-        <div class="hidden lg:flex items-center gap-3">
-          <a href="login.html" class="px-4 py-2.5 text-xs uppercase font-bold tracking-wider border border-neutral-700 rounded-lg text-white hover:bg-neutral-800 transition-colors">
-            Sign In
-          </a>
-          <a href="booking.html" class="px-5 py-2.5 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-brand-redHover rounded-lg shadow-lg shadow-brand-red/25 transition-all">
-            Book Appointment
-          </a>
-        </div>
-
-        <!-- Mobile Controls -->
-        <div class="flex items-center gap-2 lg:hidden">
-          <button type="button" class="w-10 h-10 flex items-center justify-center border border-neutral-800 rounded-lg text-white">
-            <i data-lucide="menu" class="w-5 h-5"></i>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </header>
+  
 
   <!-- MAIN CONTENT -->
   <main class="flex-1 pt-20 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <!-- Back to Home -->
+    <a href="index.html" class="absolute top-6 left-6 sm:top-8 sm:left-8 flex items-center gap-2 text-neutral-500 hover:text-white transition-colors font-semibold text-xs uppercase tracking-wider z-50">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+    </a>
+
     
     <!-- Background Grid Effect -->
     <div class="absolute inset-0 bg-[radial-gradient(#e52323_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none"></div>
@@ -95,7 +63,30 @@
     <div class="w-full max-w-md relative z-10">
       
       <!-- CARD CONTAINER -->
-      <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-8 sm:p-10 shadow-2xl">
+      <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+        
+        <!-- Toggles -->
+        <div class="absolute top-4 right-4 flex items-center gap-2">
+          <button type="button" class="theme-toggle-btn w-8 h-8 rounded bg-neutral-900 border border-neutral-800 text-neutral-400 flex items-center justify-center hover:text-white transition-colors">
+            <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+            <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+          </button>
+          <button type="button" class="rtl-toggle-btn w-8 h-8 rounded bg-neutral-900 border border-neutral-800 text-neutral-400 flex items-center justify-center hover:text-white transition-colors">
+            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Brand Logo -->
+        <div class="flex justify-center mb-6">
+          <a href="index.html" class="flex items-center gap-2 group">
+            <div class="w-8 h-8 bg-brand-red text-white flex items-center justify-center rounded font-bold shadow-lg shadow-brand-red/30">
+              <i data-lucide="wrench" class="w-4 h-4"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-xl font-extrabold uppercase tracking-wider text-white leading-none">AutoCare</span>
+            </div>
+          </a>
+        </div>
         
         <!-- Header -->
         <div class="text-center mb-8">
@@ -141,7 +132,10 @@
             <label class="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-2">Password *</label>
             <div class="relative">
               <i data-lucide="lock" class="w-4 h-4 text-neutral-500 absolute left-4 top-3.5"></i>
-              <input type="password" placeholder="••••••••" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-11 pr-4 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-colors">
+              <input type="password" placeholder="••••••••" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-11 pr-10 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-colors">
+              <button type="button" class="absolute right-4 top-3.5 text-neutral-500 hover:text-neutral-300" onclick="const input = this.previousElementSibling; input.type = input.type === 'password' ? 'text' : 'password';">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
             </div>
           </div>
 
@@ -150,7 +144,10 @@
             <label class="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-2">Confirm Password *</label>
             <div class="relative">
               <i data-lucide="shield-check" class="w-4 h-4 text-neutral-500 absolute left-4 top-3.5"></i>
-              <input type="password" placeholder="••••••••" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-11 pr-4 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-colors">
+              <input type="password" placeholder="••••••••" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-11 pr-10 py-3 text-xs text-white focus:outline-none focus:border-brand-red transition-colors">
+              <button type="button" class="absolute right-4 top-3.5 text-neutral-500 hover:text-neutral-300" onclick="const input = this.previousElementSibling; input.type = input.type === 'password' ? 'text' : 'password';">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
             </div>
           </div>
 
@@ -158,7 +155,7 @@
           <div class="flex items-start gap-2 pt-2">
             <input type="checkbox" id="terms" required class="mt-1 accent-brand-red bg-neutral-900 border-neutral-800 rounded">
             <label for="terms" class="text-[11px] text-neutral-400 leading-tight">
-              I agree to the <a href="#" class="text-white underline hover:text-brand-red">Terms of Service</a> and <a href="#" class="text-white underline hover:text-brand-red">Privacy Policy</a>.
+              I agree to the <a href="404.html" class="text-white underline hover:text-brand-red">Terms of Service</a> and <a href="404.html" class="text-white underline hover:text-brand-red">Privacy Policy</a>.
             </label>
           </div>
 
@@ -195,15 +192,8 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-black text-neutral-400 border-t border-neutral-800 py-8 text-xs text-center">
-    <div class="max-w-7xl mx-auto px-4">
-      <p>&copy; 2026 Apex Auto Care. All rights reserved.</p>
-    </div>
-  </footer>
+  
 
-  <script>
-    lucide.createIcons();
-  </script>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>

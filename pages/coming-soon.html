@@ -53,38 +53,18 @@
       }
     })();
   </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 font-sans">
 
-  <!-- TOP HEADER / COMPACT NAV -->
-  <header class="w-full border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center gap-3 shrink-0">
-        <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold">
-          <i data-lucide="wrench" class="w-5 h-5"></i>
-        </div>
-        <div class="flex flex-col">
-          <span class="font-serif text-xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-white leading-tight">Apex Auto</span>
-          <span class="text-[10px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold">Care & Oil Change</span>
-        </div>
-      </a>
-
-      <!-- Quick Toggles -->
-      <div class="flex items-center gap-3">
-        <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
-          <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
-          <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
-        </button>
-        <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
-          <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
-        </button>
-        <a href="index.html" class="hidden sm:inline-flex px-4 py-2 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-red-700 rounded shadow-md transition-all">
-          Back To Home
-        </a>
-      </div>
-    </div>
-  </header>
+  
 
   <!-- MAIN CONTENT -->
   <main class="flex-1 flex items-center justify-center py-16 px-4 relative overflow-hidden">
@@ -150,7 +130,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-neutral-950 border-t border-neutral-800 py-6 text-xs text-neutral-400">
+  <footer class="bg-white dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800 py-6 text-xs text-neutral-400">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
       <div>
         &copy; 2026 Developed by Abhivorn Technologies Pvt. Ltd. All Rights Reserved.
@@ -163,37 +143,6 @@
   </footer>
 
   <!-- JS SCRIPTS -->
-  <script>
-    lucide.createIcons();
-
-    // Theme Toggle Script
-    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('apexTheme', isDark ? 'dark' : 'light');
-      });
-    });
-
-    // RTL Toggle Script
-    document.querySelectorAll('.rtl-toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const isRTL = document.documentElement.dir === 'rtl';
-        document.documentElement.dir = isRTL ? 'ltr' : 'rtl';
-        localStorage.setItem('apexRTL', !isRTL);
-      });
-    });
-
-    // Countdown Timer Logic
-    const launchDate = new Date().getTime() + (24 * 24 * 60 * 60 * 1000); // 24 Days from now
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-
-      document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-      document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
-    }, 1000);
-  </script>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
