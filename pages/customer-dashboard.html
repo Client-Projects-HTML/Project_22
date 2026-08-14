@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth" dir="ltr">
+<html lang="en" dir="ltr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -46,42 +46,42 @@
   <link rel="stylesheet" href="../assets/css/dark-mode.css">
   <link rel="stylesheet" href="../assets/css/rtl.css">
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
+  <!-- Early Theme & RTL Restore -->
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('apexTheme');
-      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      const theme = localStorage.getItem('apexTheme');
+      if (theme === 'dark') {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
-      const savedRTL = localStorage.getItem('apexRTL');
-      if (savedRTL === 'true') {
-        document.documentElement.dir = 'rtl';
-      } else {
-        document.documentElement.dir = 'ltr';
+      const dir = localStorage.getItem('apexDir') || (localStorage.getItem('apexRTL') === 'true' ? 'rtl' : 'ltr');
+      if (dir) {
+        document.documentElement.setAttribute('dir', dir);
       }
     })();
   </script>
-</head>
-<body class="min-h-screen bg-neutral-50 dark:bg-brand-charcoal text-neutral-900 dark:text-neutral-100 font-sans selection:bg-brand-red selection:text-white overflow-x-hidden">
 
-    <section class="w-screen min-h-screen flex shrink-0 bg-white dark:bg-brand-charcoal">
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
+</head>
+<body class="min-h-screen bg-neutral-50 dark:bg-brand-charcoal text-neutral-900 dark:text-neutral-100 font-sans selection:bg-brand-red selection:text-white">
+
+    <section class="w-full min-h-screen flex bg-white dark:bg-brand-charcoal">
       
-      <!-- Mobile Overlay -->
-      <div id="dashboard-overlay" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm" onclick="toggleDashboardSidebar()"></div>
+      <!-- Mobile Overlay (Blurs entire screen including navbar) -->
+      <div id="dashboard-overlay" class="fixed inset-0 bg-black/60 z-50 hidden md:hidden backdrop-blur-md transition-all duration-300" onclick="toggleDashboardSidebar()"></div>
       
-      <!-- SIDEBAR NAVIGATION -->
-      <aside id="dashboard-sidebar" class="w-64 border-r border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-brand-charcoal flex flex-col justify-between shrink-0 absolute md:relative z-50 h-full transition-transform duration-300 -translate-x-full md:translate-x-0">
+      <!-- SIDEBAR NAVIGATION (Opens from Right on Mobile, Sticky on Desktop) -->
+      <aside id="dashboard-sidebar" class="w-64 border-l md:border-l-0 md:border-r border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-brand-charcoal flex flex-col justify-between shrink-0 fixed md:sticky top-0 right-0 md:right-auto md:left-0 z-[60] h-full md:h-screen transition-transform duration-300 translate-x-full md:translate-x-0">
         <div class="p-6">
           <a href="index.html" class="flex items-center gap-3 group mb-8">
-            <div class="w-9 h-9 bg-brand-red text-brand-charcoal dark:text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
-              <i data-lucide="user" class="w-5 h-5"></i>
+            <div class="w-9 h-9 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
             </div>
             <div class="flex flex-col">
-              <span class="font-serif text-xl font-extrabold uppercase tracking-wider text-brand-charcoal dark:text-white leading-none">My Garage</span>
-              <span class="text-[8px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold mt-1">Customer Portal</span>
+              <span class="font-serif text-xl font-extrabold uppercase tracking-wider text-brand-charcoal dark:text-white leading-none">AutoCare</span>
+              <span class="text-[8px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold mt-1">Service Center</span>
             </div>
           </a>
 
@@ -97,9 +97,10 @@
               <i data-lucide="file-clock" class="w-4 h-4"></i> Service History
             </button>
             
-            <a href="booking.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive hover:bg-neutral-200 dark:bg-neutral-800">
+            <button id="navBooking" onclick="switchSection('booking')" 
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all nav-btn-inactive">
               <i data-lucide="calendar-plus" class="w-4 h-4"></i> Book Appointment
-            </a>
+            </button>
           </nav>
         </div>
 
@@ -120,33 +121,90 @@
       </aside>
 
       <!-- MAIN PORTAL CONTAINER -->
-      <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <header class="h-20 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-brand-charcoal/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
-          <div class="flex items-center gap-2 sm:gap-4">
-            <button type="button" class="md:hidden p-2 -ml-2 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors" onclick="toggleDashboardSidebar()">
-              <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-            <h2 id="portalHeaderTitle" class="font-serif text-xl sm:text-2xl font-bold uppercase text-brand-charcoal dark:text-white tracking-wider">Customer Portal</h2>
+      <div class="flex-1 flex flex-col min-w-0 min-h-screen">
+        <header class="h-16 sm:h-20 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-brand-charcoal/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between fixed top-0 left-0 right-0 md:left-64 z-40 shadow-sm">
+          <div class="flex items-center min-w-0">
+            <h2 id="portalHeaderTitle" class="font-serif text-xs sm:text-lg md:text-2xl font-bold uppercase text-brand-charcoal dark:text-white tracking-wide truncate">Customer Portal</h2>
           </div>
 
-          <div class="flex items-center gap-4">
-            <a href="index.html" class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors hidden sm:block">Back to Website</a>
-            <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 rounded-lg flex items-center justify-center ">
-              <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
-              <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+          <div class="flex items-center gap-1.5 sm:gap-3 relative shrink-0">
+            <!-- Theme Toggle -->
+            <button type="button" class="theme-toggle-btn w-8 h-8 sm:w-9 sm:h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-xl flex items-center justify-center transition-colors" title="Toggle Light/Dark Theme">
+              <i data-lucide="sun" class="theme-sun w-3.5 h-3.5 sm:w-4 sm:h-4 hidden"></i>
+              <i data-lucide="moon" class="theme-moon w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
             </button>
-            <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 rounded-lg flex items-center justify-center ">
-              <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+
+            <!-- RTL Direction Toggle -->
+            <button type="button" onclick="toggleDirectionRTL()" class="rtl-toggle-btn w-8 h-8 sm:w-9 sm:h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-xl flex items-center justify-center transition-colors" title="Toggle RTL/LTR Direction">
+              <i data-lucide="arrow-left-right" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
             </button>
-            <button class="relative p-2 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white transition-colors">
-              <i data-lucide="bell" class="w-5 h-5"></i>
-              <span class="absolute top-1 right-1 w-2 h-2 bg-amber-500 rounded-full"></span>
+
+            <!-- Notifications Bell Button with Interactive Dropdown -->
+            <div class="relative">
+              <button type="button" id="notifBellBtn" onclick="toggleNotificationsMenu(event)" class="relative w-8 h-8 sm:w-9 sm:h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-xl flex items-center justify-center transition-colors" title="View Notifications">
+                <i data-lucide="bell" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                <span id="notifBadge" class="absolute -top-1 -right-1 w-4 h-4 bg-brand-red text-white text-[9px] font-bold flex items-center justify-center rounded-full shadow-sm">3</span>
+              </button>
+
+              <!-- Notifications Dropdown Popup -->
+              <div id="notificationsDropdown" class="absolute right-0 rtl:right-auto rtl:left-0 mt-3 w-[calc(100vw-2rem)] sm:w-88 max-w-sm bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-2xl p-4 hidden z-50 transition-all">
+                <div class="flex items-center justify-between pb-3 border-b border-neutral-200 dark:border-neutral-800 mb-3">
+                  <div class="flex items-center gap-2">
+                    <i data-lucide="bell" class="w-4 h-4 text-brand-red"></i>
+                    <h4 class="font-serif font-bold uppercase text-sm text-brand-charcoal dark:text-white">Notifications</h4>
+                  </div>
+                  <button type="button" onclick="clearNotifications()" class="text-[11px] text-brand-red hover:underline font-semibold">Mark All Read</button>
+                </div>
+
+                <div id="notifList" class="space-y-2.5 max-h-64 overflow-y-auto">
+                  <div class="p-2.5 bg-neutral-50 dark:bg-neutral-900/60 rounded-xl border border-neutral-200 dark:border-neutral-800/80 flex items-start gap-2.5 relative group">
+                    <span class="w-2 h-2 rounded-full bg-brand-red mt-1.5 shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-bold text-brand-charcoal dark:text-white">Maintenance Due Soon</p>
+                      <p class="text-[11px] text-neutral-500 dark:text-neutral-400">Your Toyota Camry is due for oil change in 500 miles.</p>
+                      <span class="text-[9px] text-neutral-400 font-mono">10 mins ago</span>
+                    </div>
+                    <button type="button" onclick="dismissNotification(this)" class="text-neutral-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Dismiss">
+                      <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                  </div>
+
+                  <div class="p-2.5 bg-neutral-50 dark:bg-neutral-900/60 rounded-xl border border-neutral-200 dark:border-neutral-800/80 flex items-start gap-2.5 relative group">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-bold text-brand-charcoal dark:text-white">Appointment Confirmed</p>
+                      <p class="text-[11px] text-neutral-500 dark:text-neutral-400">Brake Pad Replacement scheduled for Aug 14.</p>
+                      <span class="text-[9px] text-neutral-400 font-mono">2 hours ago</span>
+                    </div>
+                    <button type="button" onclick="dismissNotification(this)" class="text-neutral-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Dismiss">
+                      <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                  </div>
+
+                  <div class="p-2.5 bg-neutral-50 dark:bg-neutral-900/60 rounded-xl border border-neutral-200 dark:border-neutral-800/80 flex items-start gap-2.5 relative group">
+                    <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-bold text-brand-charcoal dark:text-white">Active Recall Status</p>
+                      <p class="text-[11px] text-neutral-500 dark:text-neutral-400">Your vehicles are up to date on all active safety recalls.</p>
+                      <span class="text-[9px] text-neutral-400 font-mono">1 day ago</span>
+                    </div>
+                    <button type="button" onclick="dismissNotification(this)" class="text-neutral-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Dismiss">
+                      <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Hamburger Menu Button (Right side, after Notifications) -->
+            <button type="button" class="md:hidden w-8 h-8 sm:w-9 sm:h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-xl flex items-center justify-center transition-colors" onclick="toggleDashboardSidebar()" title="Toggle Navigation Menu">
+              <i data-lucide="menu" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
             </button>
             
           </div>
         </header>
 
-        <main class="p-6 sm:p-8 space-y-8 max-w-7xl">
+        <main class="pt-24 sm:pt-28 px-4 sm:px-8 pb-8 space-y-8 max-w-7xl">
           
           <!-- SECTION 1: OVERVIEW PANEL -->
           <div id="sectionOverview" class="space-y-8">
@@ -162,9 +220,9 @@
                   <p class="text-neutral-600 dark:text-neutral-300 text-sm mt-1">Your <strong>2018 Toyota Camry</strong> is due for a Full Synthetic Oil Change in <strong>500 miles</strong>.</p>
                 </div>
               </div>
-              <a href="booking.html" class="px-5 py-2.5 bg-amber-500 text-brand-charcoal hover:bg-amber-400 rounded-lg text-xs font-bold uppercase tracking-wider shrink-0 transition-colors">
+              <button type="button" onclick="switchSection('booking')" class="px-5 py-2.5 bg-amber-500 text-brand-charcoal hover:bg-amber-400 rounded-lg text-xs font-bold uppercase tracking-wider shrink-0 transition-colors">
                 Book Now
-              </a>
+              </button>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -173,10 +231,10 @@
               <div class="lg:col-span-1 bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6">
                 <div class="flex items-center justify-between mb-6">
                   <h3 class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">My Vehicles</h3>
-                  <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase"><i data-lucide="plus" class="w-4 h-4"></i></button>
+                  <button type="button" onclick="openAddVehicleModal()" class="text-brand-red hover:text-red-400 text-xs font-bold uppercase p-1 rounded-lg hover:bg-brand-red/10 transition-colors" title="Register New Vehicle"><i data-lucide="plus" class="w-4 h-4"></i></button>
                 </div>
                 
-                <div class="space-y-4">
+                <div id="myVehiclesList" class="space-y-4">
                   <div class="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4 rounded-2xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-neutral-500 dark:text-neutral-400">
                       <i data-lucide="car" class="w-6 h-6"></i>
@@ -203,17 +261,17 @@
               <div class="lg:col-span-2 bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6">
                 <div class="flex items-center justify-between mb-6">
                   <h3 class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">Upcoming Appointments</h3>
-                  <a href="booking.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white text-xs font-mono uppercase tracking-wider">Schedule New</a>
+                  <button type="button" onclick="switchSection('booking')" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white text-xs font-mono uppercase tracking-wider">Schedule New</button>
                 </div>
                 
                 <div class="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden">
                   <table class="w-full text-left border-collapse">
-                    <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                    <tbody id="upcomingAppointmentsTableBody" class="divide-y divide-neutral-200 dark:divide-neutral-800">
                       <tr class="hover:bg-neutral-200 dark:bg-neutral-800/50 transition-colors">
                         <td class="p-4 align-top">
                           <div class="bg-brand-red/10 text-brand-red rounded-lg p-2 text-center w-14">
-                            <span class="block text-xs font-bold uppercase">Aug</span>
-                            <span class="block text-lg font-serif font-bold">14</span>
+                            <span id="apptMonthDisplay" class="block text-xs font-bold uppercase">Aug</span>
+                            <span id="apptDayDisplay" class="block text-lg font-serif font-bold">14</span>
                           </div>
                         </td>
                         <td class="p-4 align-top">
@@ -221,11 +279,11 @@
                           <p class="text-xs text-neutral-500 dark:text-neutral-400">2021 Ford F-150</p>
                         </td>
                         <td class="p-4 align-top hidden sm:table-cell">
-                          <p class="text-sm text-neutral-600 dark:text-neutral-300">09:00 AM - 11:00 AM</p>
+                          <p id="apptTimeDisplay" class="text-sm text-neutral-600 dark:text-neutral-300">09:00 AM - 11:00 AM</p>
                           <p class="text-[11px] font-mono text-emerald-400 mt-1 uppercase">Confirmed</p>
                         </td>
                         <td class="p-4 align-top text-right">
-                          <button class="px-3 py-1.5 border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white hover:border-neutral-500 rounded text-xs font-semibold transition-colors">Reschedule</button>
+                          <button type="button" onclick="openRescheduleModal('Brake Pad Replacement', '2021 Ford F-150', 'Aug 14', '09:00 AM - 11:00 AM')" class="px-3 py-1.5 border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-brand-charcoal dark:hover:text-white hover:border-neutral-500 rounded text-xs font-semibold transition-colors">Reschedule</button>
                         </td>
                       </tr>
                     </tbody>
@@ -250,7 +308,7 @@
                 <i data-lucide="file-clock" class="w-5 h-5 text-brand-red"></i>
                 <h3 class="font-serif text-xl font-bold uppercase text-brand-charcoal dark:text-white">Service History</h3>
               </div>
-              <button class="px-3 py-1.5 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-mono text-neutral-600 dark:text-neutral-300 hover:text-brand-charcoal dark:hover:text-white flex items-center gap-2">
+              <button type="button" onclick="openInvoicesModal()" class="px-3 py-1.5 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-mono text-neutral-600 dark:text-neutral-300 hover:text-brand-charcoal dark:hover:text-white flex items-center gap-2 transition-colors">
                 <i data-lucide="download" class="w-3 h-3"></i> Invoices
               </button>
             </div>
@@ -286,7 +344,7 @@
                       <p class="text-sm font-bold text-brand-charcoal dark:text-white">$69.99</p>
                     </td>
                     <td class="p-4 text-right">
-                      <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
+                      <button type="button" onclick="openPdfModal('#INV-2026-0312', 'Mar 12, 2026', '2018 Toyota Camry', 'Full Synthetic Oil Change', '$69.99')" class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
                     </td>
                   </tr>
 
@@ -308,7 +366,7 @@
                       <p class="text-sm font-bold text-brand-charcoal dark:text-white">$120.00</p>
                     </td>
                     <td class="p-4 text-right">
-                      <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
+                      <button type="button" onclick="openPdfModal('#INV-2025-1005', 'Oct 05, 2025', '2018 Toyota Camry', 'Tire Rotation & Alignment', '$120.00')" class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
                     </td>
                   </tr>
 
@@ -330,7 +388,7 @@
                       <p class="text-sm font-bold text-brand-charcoal dark:text-white">$45.00</p>
                     </td>
                     <td class="p-4 text-right">
-                      <button class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
+                      <button type="button" onclick="openPdfModal('#INV-2025-0618', 'Jun 18, 2025', '2021 Ford F-150', 'Annual Diagnostic Check', '$45.00')" class="text-brand-red hover:text-red-400 text-xs font-bold uppercase tracking-wider">View PDF</button>
                     </td>
                   </tr>
                 </tbody>
@@ -338,9 +396,297 @@
             </div>
           </section>
 
+          <!-- SECTION 3: IN-DASHBOARD BOOK APPOINTMENT FORM -->
+          <section id="sectionBooking" class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm" style="display: none;">
+            <div class="flex items-center gap-3 pb-4 border-b border-neutral-200 dark:border-neutral-800">
+              <div class="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center font-bold">
+                <i data-lucide="calendar" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-bold uppercase text-brand-charcoal dark:text-white">Book Service Appointment</h3>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400">Schedule your vehicle service directly within your portal without leaving your dashboard.</p>
+              </div>
+            </div>
+
+            <!-- BOOKING FORM -->
+            <form onsubmit="handleInDashboardBooking(event)" class="space-y-6 max-w-3xl">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Select Vehicle -->
+                <div>
+                  <label class="block text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300 mb-2">Select Your Vehicle *</label>
+                  <select id="bookVehicle" required class="w-full px-4 py-3 bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl text-xs font-semibold text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red">
+                    <option value="2018 Toyota Camry">2018 Toyota Camry (Lic # XYZ-1234)</option>
+                    <option value="2021 Ford F-150">2021 Ford F-150 (Lic # ABC-9876)</option>
+                    <option value="Register New Vehicle">+ Register New Vehicle</option>
+                  </select>
+                </div>
+
+                <!-- Service Package -->
+                <div>
+                  <label class="block text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300 mb-2">Service Package *</label>
+                  <select id="bookService" required class="w-full px-4 py-3 bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl text-xs font-semibold text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red">
+                    <option value="Full Synthetic Oil Change">Express Oil Change &amp; Filter ($69.99)</option>
+                    <option value="Brake Pad Replacement">Brake Pad Replacement ($120.00)</option>
+                    <option value="Computer Engine Diagnostics">Computer Engine Diagnostics ($45.00)</option>
+                    <option value="Tire Balance & Alignment">Tire Balance &amp; Rotation ($55.00)</option>
+                    <option value="AC & Radiator Flush">AC &amp; Radiator Flush ($89.00)</option>
+                  </select>
+                </div>
+
+                <!-- Preferred Date -->
+                <div>
+                  <label class="block text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300 mb-2">Preferred Service Date *</label>
+                  <input type="date" id="bookDate" required value="2026-08-20" class="w-full px-4 py-3 bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl text-xs font-semibold text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red">
+                </div>
+
+                <!-- Preferred Time Slot -->
+                <div>
+                  <label class="block text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300 mb-2">Preferred Time Slot *</label>
+                  <select id="bookTime" required class="w-full px-4 py-3 bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl text-xs font-semibold text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red">
+                    <option value="09:00 AM">09:00 AM (Morning Slot)</option>
+                    <option value="11:30 AM">11:30 AM (Midday Slot)</option>
+                    <option value="02:00 PM">02:00 PM (Afternoon Slot)</option>
+                    <option value="04:30 PM">04:30 PM (Evening Slot)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Notes -->
+              <div>
+                <label class="block text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300 mb-2">Additional Service Notes (Optional)</label>
+                <textarea id="bookNotes" rows="3" placeholder="Describe any specific issues, squeaks, or requests..." class="w-full px-4 py-3 bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red"></textarea>
+              </div>
+
+              <!-- Submit Action Button -->
+              <button type="submit" class="px-8 py-3.5 bg-brand-red hover:bg-red-700 text-white font-bold uppercase tracking-wider text-xs rounded-xl shadow-lg shadow-brand-red/30 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4"></i> Confirm Appointment Booking
+              </button>
+            </form>
+          </section>
+
         </main>
       </div>
     </section>
+
+  <!-- =================================================================== -->
+  <!-- RESCHEDULE APPOINTMENT MODAL                                        -->
+  <!-- =================================================================== -->
+  <div id="rescheduleModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+    <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl relative">
+      <button type="button" onclick="closeRescheduleModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center">
+          <i data-lucide="calendar" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">Reschedule Appointment</h3>
+          <p class="text-xs text-neutral-500">Select a new date and time slot for your service.</p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl mb-6">
+        <p id="rescheduleServiceName" class="text-xs font-bold text-brand-charcoal dark:text-white">Brake Pad Replacement</p>
+        <p id="rescheduleVehicleName" class="text-[11px] text-neutral-500">2021 Ford F-150</p>
+      </div>
+
+      <form onsubmit="submitReschedule(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">New Preferred Date *</label>
+          <input type="date" id="rescheduleDate" required value="2026-08-20" class="w-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red transition-colors">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Time Slot *</label>
+          <select id="rescheduleTime" class="w-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red transition-colors">
+            <option value="09:00 AM - 11:00 AM" selected>09:00 AM - 11:00 AM (Morning)</option>
+            <option value="11:30 AM - 01:30 PM">11:30 AM - 01:30 PM (Mid-day)</option>
+            <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM (Afternoon)</option>
+            <option value="04:30 PM - 06:30 PM">04:30 PM - 06:30 PM (Evening)</option>
+          </select>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+          <button type="button" onclick="closeRescheduleModal()" class="px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-bold transition-all">Cancel</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-brand-red text-white hover:bg-red-700 text-xs font-bold uppercase tracking-wider shadow-lg shadow-brand-red/20 transition-all">Confirm Reschedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- VIEW PDF INVOICE MODAL                                             -->
+  <!-- =================================================================== -->
+  <div id="viewPdfModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+    <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-xl shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button type="button" onclick="closePdfModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center justify-between pb-6 border-b border-neutral-200 dark:border-neutral-800 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brand-red text-white rounded-xl flex items-center justify-center font-bold">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="pdfInvoiceNum" class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">#INV-2026-0312</h3>
+            <p class="text-xs text-neutral-500">Official Service Invoice Document</p>
+          </div>
+        </div>
+        <span class="px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 font-mono text-xs font-bold rounded-full uppercase">PAID</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 p-4 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl mb-6 text-xs">
+        <div>
+          <span class="text-neutral-400 block text-[10px] uppercase font-mono mb-1">Customer Info</span>
+          <p class="font-bold text-brand-charcoal dark:text-white">John Doe</p>
+          <p class="text-neutral-500">john.doe@example.com</p>
+        </div>
+        <div>
+          <span class="text-neutral-400 block text-[10px] uppercase font-mono mb-1">Service Details</span>
+          <p id="pdfDate" class="font-bold text-brand-charcoal dark:text-white">Mar 12, 2026</p>
+          <p id="pdfVehicle" class="text-neutral-500">2018 Toyota Camry</p>
+        </div>
+      </div>
+
+      <div class="border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden mb-6">
+        <table class="w-full text-xs text-left">
+          <thead class="bg-neutral-100 dark:bg-neutral-900 text-neutral-500 font-mono text-[10px] uppercase">
+            <tr>
+              <th class="p-3">Description</th>
+              <th class="p-3 text-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-700 dark:text-neutral-300">
+            <tr>
+              <td id="pdfService" class="p-3 font-semibold">Full Synthetic Oil Change</td>
+              <td class="p-3 text-right font-mono">$49.99</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Multi-Point Safety Inspection &amp; Fluids</td>
+              <td class="p-3 text-right font-mono">$20.00</td>
+            </tr>
+          </tbody>
+          <tfoot class="bg-neutral-50 dark:bg-neutral-900/60 font-bold border-t border-neutral-200 dark:border-neutral-800">
+            <tr>
+              <td class="p-3 text-brand-charcoal dark:text-white uppercase font-serif">Total Paid</td>
+              <td id="pdfTotalCost" class="p-3 text-right text-brand-red font-mono text-sm">$69.99</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-between pt-4 border-t border-neutral-200 dark:border-neutral-800">
+        <button type="button" onclick="window.print()" class="px-4 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-bold flex items-center gap-2 transition-all">
+          <i data-lucide="printer" class="w-4 h-4"></i> Print
+        </button>
+        <button type="button" onclick="downloadPdfFile(document.getElementById('pdfInvoiceNum').textContent)" class="px-5 py-2.5 rounded-xl bg-brand-red text-white hover:bg-red-700 text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-brand-red/20 transition-all">
+          <i data-lucide="download" class="w-4 h-4"></i> Download PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- INVOICES SUMMARY EXPORT MODAL                                      -->
+  <!-- =================================================================== -->
+  <div id="invoicesExportModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+    <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl relative">
+      <button type="button" onclick="closeInvoicesModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center">
+          <i data-lucide="download" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">Export Invoices</h3>
+          <p class="text-xs text-neutral-500">Download completed service statements.</p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl mb-6 space-y-2">
+        <div class="flex justify-between text-xs">
+          <span class="text-neutral-500">Total Services:</span>
+          <span class="font-bold text-brand-charcoal dark:text-white">3 Records</span>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-neutral-500">Total Paid:</span>
+          <span class="font-bold text-brand-red font-mono">$234.99</span>
+        </div>
+      </div>
+
+      <div class="space-y-3 mb-6">
+        <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400">Select Export Format *</label>
+        <div class="grid grid-cols-3 gap-2">
+          <button type="button" id="fmtZipBtn" onclick="selectExportFormat('zip')" class="p-3 bg-brand-red text-white font-bold rounded-xl border border-brand-red text-xs text-center shadow-md transition-all export-fmt-btn">
+            ZIP Bundle
+          </button>
+          <button type="button" id="fmtPdfBtn" onclick="selectExportFormat('pdf')" class="p-3 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs font-bold text-neutral-700 dark:text-neutral-300 text-center transition-all export-fmt-btn">
+            PDF Summary
+          </button>
+          <button type="button" id="fmtCsvBtn" onclick="selectExportFormat('csv')" class="p-3 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs font-bold text-neutral-700 dark:text-neutral-300 text-center transition-all export-fmt-btn">
+            CSV File
+          </button>
+        </div>
+      </div>
+
+      <button type="button" onclick="downloadInvoicesBundle()" class="w-full py-3.5 bg-brand-red hover:bg-red-700 text-white font-bold uppercase tracking-wider text-xs rounded-xl shadow-lg shadow-brand-red/30 transition-all flex items-center justify-center gap-2">
+        <i data-lucide="download" class="w-4 h-4"></i> Download Invoices
+      </button>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- ADD NEW VEHICLE MODAL                                              -->
+  <!-- =================================================================== -->
+  <div id="addVehicleModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+    <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl relative">
+      <button type="button" onclick="closeAddVehicleModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center font-bold">
+          <i data-lucide="car" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-serif text-lg font-bold uppercase text-brand-charcoal dark:text-white">Register New Vehicle</h3>
+          <p class="text-xs text-neutral-500">Add a vehicle to your garage for quick booking.</p>
+        </div>
+      </div>
+
+      <form onsubmit="submitAddVehicle(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Year *</label>
+          <input type="number" id="vehYear" required min="1990" max="2027" placeholder="e.g. 2023" class="w-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red transition-colors">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Make *</label>
+          <input type="text" id="vehMake" required placeholder="e.g. Honda, Tesla, BMW" class="w-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red transition-colors">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Model *</label>
+          <input type="text" id="vehModel" required placeholder="e.g. Civic, Model 3, X5" class="w-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red transition-colors">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">License Plate *</label>
+          <input type="text" id="vehLicense" required placeholder="e.g. 8XYZ456" class="w-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red transition-colors">
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+          <button type="button" onclick="closeAddVehicleModal()" class="px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-bold transition-all">Cancel</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-brand-red text-white hover:bg-red-700 text-xs font-bold uppercase tracking-wider shadow-lg shadow-brand-red/20 transition-all">Register Vehicle</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script>
     // Dashboard Logic
@@ -348,21 +694,33 @@
       const sidebar = document.getElementById('dashboard-sidebar');
       const overlay = document.getElementById('dashboard-overlay');
       
-      if (sidebar.classList.contains('-translate-x-full')) {
-        sidebar.classList.remove('-translate-x-full');
+      if (sidebar.classList.contains('translate-x-full')) {
+        sidebar.classList.remove('translate-x-full');
         overlay.classList.remove('hidden');
       } else {
-        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.add('translate-x-full');
         overlay.classList.add('hidden');
       }
     }
 
     function switchSection(sectionId) {
-      document.getElementById('sectionOverview').style.display = (sectionId === 'overview') ? 'block' : 'none';
-      document.getElementById('sectionHistory').style.display = (sectionId === 'history') ? 'block' : 'none';
+      const overview = document.getElementById('sectionOverview');
+      const history = document.getElementById('sectionHistory');
+      const booking = document.getElementById('sectionBooking');
+      const title = document.getElementById('portalHeaderTitle');
+
+      if (overview) overview.style.display = (sectionId === 'overview') ? 'block' : 'none';
+      if (history) history.style.display = (sectionId === 'history') ? 'block' : 'none';
+      if (booking) booking.style.display = (sectionId === 'booking') ? 'block' : 'none';
+
+      if (title) {
+        if (sectionId === 'overview') title.textContent = 'Customer Portal';
+        else if (sectionId === 'history') title.textContent = 'Service History';
+        else if (sectionId === 'booking') title.textContent = 'Book Appointment';
+      }
       
       // Update sidebar nav active state
-      const navs = ['navOverview', 'navHistory'];
+      const navs = ['navOverview', 'navHistory', 'navBooking'];
       navs.forEach(nav => {
         const btn = document.getElementById(nav);
         if(btn) {
@@ -381,6 +739,46 @@
       if(window.innerWidth < 768) {
          toggleDashboardSidebar();
       }
+    }
+
+    function handleInDashboardBooking(e) {
+      e.preventDefault();
+      const vehicle = document.getElementById('bookVehicle')?.value || '2018 Toyota Camry';
+      const service = document.getElementById('bookService')?.value || 'Full Synthetic Oil Change';
+      const date = document.getElementById('bookDate')?.value || '2026-08-15';
+      const time = document.getElementById('bookTime')?.value || '09:00 AM';
+
+      ApexScripts.showToast(`✅ Appointment Booked for ${service} on ${date} at ${time}!`);
+
+      // Add notification to bell dropdown
+      const notifList = document.getElementById('notifList');
+      const notifBadge = document.getElementById('notifBadge');
+      if (notifList) {
+        const emptyMsg = notifList.querySelector('p');
+        if (emptyMsg && emptyMsg.textContent.includes('No unread')) notifList.innerHTML = '';
+        const newNotif = document.createElement('div');
+        newNotif.className = "p-2.5 bg-neutral-50 dark:bg-neutral-900/60 rounded-xl border border-neutral-200 dark:border-neutral-800/80 flex items-start gap-2.5 relative group";
+        newNotif.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span>
+          <div class="flex-1 min-w-0">
+            <p class="text-xs font-bold text-brand-charcoal dark:text-white">Appointment Confirmed</p>
+            <p class="text-[11px] text-neutral-500 dark:text-neutral-400">${service} on ${date} at ${time}.</p>
+            <span class="text-[9px] text-neutral-400 font-mono">Just now</span>
+          </div>
+          <button type="button" onclick="dismissNotification(this)" class="text-neutral-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1">
+            <i data-lucide="x" class="w-3 h-3"></i>
+          </button>
+        `;
+        notifList.insertBefore(newNotif, notifList.firstChild);
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
+      if (notifBadge) {
+        notifBadge.classList.remove('hidden');
+        const count = parseInt(notifBadge.textContent || '0') + 1;
+        notifBadge.textContent = count;
+      }
+
+      switchSection('overview');
     }
   </script>
   <script src="../assets/js/main.js"></script>

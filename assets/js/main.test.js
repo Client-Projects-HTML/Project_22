@@ -28,6 +28,20 @@ describe('ApexScripts Template Logic', () => {
       
       <div class="portfolio-item" data-category="engine" style="display: block;"></div>
       <div class="portfolio-item" data-category="brakes" style="display: block;"></div>
+
+      <div id="notificationsDropdown" class="hidden"></div>
+      <span id="notifBadge">3</span>
+      <div id="notifList">
+        <div class="p-2.5"><button id="dismissBtn"></button></div>
+      </div>
+
+      <div id="rescheduleModal" class="hidden"><p id="rescheduleServiceName"></p><p id="rescheduleVehicleName"></p></div>
+      <div id="viewPdfModal" class="hidden"><p id="pdfInvoiceNum"></p><p id="pdfDate"></p><p id="pdfVehicle"></p><p id="pdfService"></p><p id="pdfTotalCost"></p></div>
+      <div id="invoicesExportModal" class="hidden"></div>
+
+      <div id="addVehicleModal" class="hidden"></div>
+      <div id="myVehiclesList"></div>
+      <table><tbody id="upcomingAppointmentsTableBody"></tbody></table>
     `;
   });
 
@@ -123,4 +137,96 @@ describe('ApexScripts Template Logic', () => {
     expect(brakesItem.style.display).toBe('none');
   });
 
+  test('toggleNotifications should show and hide notifications dropdown', () => {
+    const dropdown = document.getElementById('notificationsDropdown');
+    expect(dropdown.classList.contains('hidden')).toBeTruthy();
+
+    ApexScripts.toggleNotifications();
+    expect(dropdown.classList.contains('hidden')).toBeFalsy();
+
+    ApexScripts.toggleNotifications();
+    expect(dropdown.classList.contains('hidden')).toBeTruthy();
+  });
+
+  test('clearNotifications should hide badge and update list', () => {
+    const badge = document.getElementById('notifBadge');
+    const list = document.getElementById('notifList');
+
+    ApexScripts.clearNotifications();
+
+    expect(badge.classList.contains('hidden')).toBeTruthy();
+    expect(list.textContent).toContain('No unread notifications');
+  });
+
+  test('dismissNotification should remove item and update badge', () => {
+    const dismissBtn = document.getElementById('dismissBtn');
+    ApexScripts.dismissNotification(dismissBtn);
+
+    const badge = document.getElementById('notifBadge');
+    const list = document.getElementById('notifList');
+    expect(badge.classList.contains('hidden')).toBeTruthy();
+    expect(list.textContent).toContain('No unread notifications');
+  });
+
+  test('openRescheduleModal and closeRescheduleModal work properly', () => {
+    const modal = document.getElementById('rescheduleModal');
+    ApexScripts.openRescheduleModal('Brake Replacement', 'Ford F150');
+    expect(modal.classList.contains('hidden')).toBeFalsy();
+    expect(document.getElementById('rescheduleServiceName').textContent).toBe('Brake Replacement');
+
+    ApexScripts.closeRescheduleModal();
+    expect(modal.classList.contains('hidden')).toBeTruthy();
+  });
+
+  test('openPdfModal and closePdfModal work properly', () => {
+    const modal = document.getElementById('viewPdfModal');
+    ApexScripts.openPdfModal('#INV-001', 'Mar 12, 2026', 'Toyota Camry', 'Oil Change', '$69.99');
+    expect(modal.classList.contains('hidden')).toBeFalsy();
+    expect(document.getElementById('pdfInvoiceNum').textContent).toBe('#INV-001');
+
+    ApexScripts.closePdfModal();
+    expect(modal.classList.contains('hidden')).toBeTruthy();
+  });
+
+  test('openInvoicesModal and closeInvoicesModal work properly', () => {
+    const modal = document.getElementById('invoicesExportModal');
+    ApexScripts.openInvoicesModal();
+    expect(modal.classList.contains('hidden')).toBeFalsy();
+
+    ApexScripts.closeInvoicesModal();
+    expect(modal.classList.contains('hidden')).toBeTruthy();
+  });
+
+  test('openAddVehicleModal, closeAddVehicleModal, and submitAddVehicle work properly', () => {
+    const modal = document.getElementById('addVehicleModal');
+    ApexScripts.openAddVehicleModal();
+    expect(modal.classList.contains('hidden')).toBeFalsy();
+
+    ApexScripts.submitAddVehicle({ preventDefault: () => {} });
+    expect(modal.classList.contains('hidden')).toBeTruthy();
+    expect(document.getElementById('myVehiclesList').children.length).toBe(1);
+  });
+
+  test('handleInDashboardBooking prepends new row to upcomingAppointmentsTableBody', () => {
+    const tbody = document.getElementById('upcomingAppointmentsTableBody');
+    expect(tbody.children.length).toBe(0);
+
+    ApexScripts.handleInDashboardBooking({ preventDefault: () => {} });
+    expect(tbody.children.length).toBe(1);
+  });
+
+  test('selectExportFormat updates active button style', () => {
+    document.body.innerHTML += `
+      <button id="fmtZipBtn" class="export-fmt-btn"></button>
+      <button id="fmtPdfBtn" class="export-fmt-btn"></button>
+      <button id="fmtCsvBtn" class="export-fmt-btn"></button>
+    `;
+    ApexScripts.selectExportFormat('pdf');
+    const pdfBtn = document.getElementById('fmtPdfBtn');
+    expect(pdfBtn.classList.contains('bg-brand-red')).toBeTruthy();
+  });
+
 });
+
+
+

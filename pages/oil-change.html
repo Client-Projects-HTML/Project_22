@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="scroll-smooth dark">
+<html lang="en" dir="ltr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,12 +34,26 @@
     }
   </script>
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="assets/css/dark-mode.css">
-  <link rel="stylesheet" href="assets/css/rtl.css">
-
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Early Theme & RTL Restore -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('apexTheme');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const rtl = localStorage.getItem('apexRTL');
+      if (rtl === 'rtl' || rtl === 'true') {
+        document.documentElement.dir = 'rtl';
+      } else {
+        document.documentElement.dir = 'ltr';
+      }
+    })();
+  </script>
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -49,10 +63,10 @@
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23DC2626%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z%22/></svg>">
 </head>
-<body class="min-h-screen flex flex-col bg-brand-charcoal text-neutral-100 font-sans selection:bg-brand-red selection:text-white">
+<body class="min-h-screen flex flex-col bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 font-sans selection:bg-brand-red selection:text-white">
 
-  <!-- NAVBAR -->
-  <header class="fixed top-0 left-0 right-0 z-50 border-b border-neutral-800/80 bg-brand-charcoal/95 backdrop-blur-md">
+  <!-- UNIFIED NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-40 border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
@@ -62,42 +76,108 @@
             <i data-lucide="wrench" class="w-5 h-5"></i>
           </div>
           <div class="flex flex-col">
-            <span class="font-serif text-2xl font-extrabold uppercase tracking-wider text-white leading-none">AutoCare</span>
-            <span class="text-[9px] tracking-[0.25em] text-neutral-400 uppercase font-semibold mt-1">Service Center</span>
+            <span class="font-serif text-xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-white leading-tight">AutoCare</span>
+            <span class="text-[10px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold">Service Center</span>
           </div>
         </a>
 
         <!-- Desktop Navigation Links -->
-        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
-          <a href="index.html" class="text-neutral-300 hover:text-white transition-colors">Home</a>
-          <a href="services.html" class="text-neutral-300 hover:text-white transition-colors">Services</a>
-          <a href="oil-change.html" class="text-brand-red font-bold">Oil Services</a>
-          <a href="express-bays.html" class="text-neutral-300 hover:text-white transition-colors">Express Bays</a>
-          <a href="pricing.html" class="text-neutral-300 hover:text-white transition-colors">Pricing</a>
-          <a href="admin.html" class="text-neutral-300 hover:text-white transition-colors">Admin Portal</a>
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
+          
+          <!-- 1. Home Dropdown -->
+          <div class="relative group">
+            <button type="button" class="inline-flex items-center gap-1 text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium py-2 focus:outline-none">
+              <span>Home</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-neutral-900 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <a href="index.html" class="block px-3 py-2 text-xs font-semibold rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red">Home 1</a>
+              <a href="home-premium.html" class="block px-3 py-2 text-xs font-semibold rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red">Home 2</a>
+            </div>
+          </div>
+
+          <!-- 2. About Us -->
+          <a href="about.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">About Us</a>
+
+          <!-- 3. Services -->
+          <a href="services.html" class="text-brand-red font-bold transition-colors">Services</a>
+
+          <!-- 5. Pricing -->
+          <a href="pricing.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Pricing</a>
+
+          <!-- 6. Our Shop -->
+          <a href="gallery.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Our Shop</a>
+          
+          <!-- 7. Contact -->
+          <a href="contact.html" class="text-neutral-700 dark:text-neutral-300 hover:text-brand-red dark:hover:text-brand-red transition-colors font-medium">Contact</a>
+          
         </nav>
 
-        <!-- Right Side Controls -->
-        <div class="hidden lg:flex items-center gap-4">
-          <a href="booking.html" class="px-4 py-2 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-brand-redHover rounded-lg shadow-lg shadow-brand-red/25 transition-all">
-            Book Oil Service
+        <!-- Right Action Controls -->
+        <div class="hidden lg:flex items-center gap-3">
+          <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+            <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+            <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+          </button>
+          
+          <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+          </button>
+
+          <a href="login.html" class="px-4 py-2 text-xs uppercase font-bold tracking-wider border border-neutral-300 dark:border-neutral-700 rounded-lg text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+            Sign In
           </a>
+          <a href="booking.html" class="px-5 py-2 text-xs uppercase font-bold tracking-wider bg-brand-red text-white hover:bg-brand-redHover rounded-lg shadow-lg shadow-brand-red/25 transition-all">
+            Book Appointment
+          </a>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <button type="button" class="theme-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+            <i data-lucide="sun" class="theme-sun w-4 h-4 hidden"></i>
+            <i data-lucide="moon" class="theme-moon w-4 h-4"></i>
+          </button>
+          <button type="button" class="rtl-toggle-btn w-9 h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg flex items-center justify-center">
+            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+          </button>
+          <button type="button" id="mobile-menu-btn" class="w-9 h-9 flex items-center justify-center border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 rounded-lg">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
         </div>
 
       </div>
     </div>
   </header>
   <!-- MOBILE DRAWER -->
-  <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-50 hidden backdrop-blur-sm"></div>
-  <div id="mobile-menu-drawer" class="fixed top-0 right-0 w-72 h-full bg-white dark:bg-neutral-900 z-50 hidden flex-col justify-between p-6 shadow-2xl">
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-50 hidden backdrop-blur-md transition-all duration-300"></div>
+  <div id="mobile-menu-drawer" class="fixed top-0 right-0 w-72 h-full bg-white dark:bg-neutral-900 z-[60] hidden flex-col justify-between p-6 shadow-2xl">
     <div>
       <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800">
-        <span class="font-serif font-bold text-lg text-brand-charcoal dark:text-white">APEX AUTO CARE</span>
+        <a href="index.html" class="flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-md shadow-brand-red/30">
+            <i data-lucide="wrench" class="w-4 h-4"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif font-bold text-base uppercase tracking-wider text-brand-charcoal dark:text-white leading-tight">AutoCare</span>
+            <span class="text-[9px] tracking-[0.15em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold">Service Center</span>
+          </div>
+        </a>
         <button type="button" id="mobile-menu-close" class="p-1 text-neutral-700 dark:text-neutral-300"><i data-lucide="x" class="w-6 h-6"></i></button>
       </div>
       <nav class="flex flex-col gap-1 mt-6">
-        <a href="index.html" class="font-semibold text-brand-red hover:text-brand-red transition-colors block py-2">Home (Classic)</a>
-        <a href="home-premium.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Home (Premium)</a>
+        <!-- Home Dropdown -->
+        <div class="mobile-dropdown group">
+          <button type="button" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.chevron-icon').classList.toggle('rotate-180');" class="w-full flex items-center justify-between font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors py-2 focus:outline-none">
+            <span>Home</span>
+            <i data-lucide="chevron-down" class="chevron-icon w-4 h-4 transition-transform duration-200"></i>
+          </button>
+          <div class="hidden flex-col pl-4 py-1 space-y-1 border-l-2 border-brand-red/30 my-1">
+            <a href="index.html" class="font-semibold text-xs text-neutral-600 dark:text-neutral-400 hover:text-brand-red dark:hover:text-brand-red block py-1.5">Home 1: Classic</a>
+            <a href="home-premium.html" class="font-semibold text-xs text-neutral-600 dark:text-neutral-400 hover:text-brand-red dark:hover:text-brand-red block py-1.5">Home 2: Premium VIP</a>
+          </div>
+        </div>
+
         <a href="about.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">About Us</a>
         <a href="services.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Services</a>
         <a href="pricing.html" class="font-semibold text-neutral-700 dark:text-neutral-300 hover:text-brand-red transition-colors block py-2">Pricing</a>
@@ -113,17 +193,17 @@
 
 
   <!-- HERO SECTION -->
-  <section class="pt-32 pb-12 relative overflow-hidden">
+  <section class="pt-32 pb-12 bg-slate-50 dark:bg-transparent relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(229,35,35,0.12)_0,transparent_60%)] pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-brand-red bg-brand-red/10 border border-brand-red/20 px-3.5 py-1.5 rounded-full inline-block mb-4">
+      <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-brand-red bg-brand-red/10 border border-brand-red/20 px-3.5 py-1.5 rounded-full inline-block mb-4 font-semibold">
         15-Minute Pit Stop Guarantee
       </span>
-      <h1 class="font-serif text-4xl sm:text-6xl font-extrabold uppercase text-white tracking-wide max-w-4xl mx-auto">
+      <h1 class="font-serif text-4xl sm:text-6xl font-extrabold uppercase text-brand-charcoal dark:text-white tracking-wide max-w-4xl mx-auto">
         Precision Oil Swaps & Engine Protection
       </h1>
-      <p class="text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto mt-4">
+      <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
         Engineered for high performance, daily commuting, and European specs. We use premium synthetic lubricants and OEM-grade filter media.
       </p>
 
@@ -131,7 +211,7 @@
         <a href="booking.html" class="px-6 py-3 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-brand-red/25 transition-all">
           Reserve Express Slot
         </a>
-        <a href="#packages" class="px-6 py-3 bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
+        <a href="#packages" class="px-6 py-3 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-brand-charcoal dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
           View Oil Packages
         </a>
       </div>
@@ -139,22 +219,22 @@
   </section>
 
   <!-- INTERACTIVE OIL CALCULATOR & SELECTOR -->
-  <section class="py-12 bg-neutral-950/60 border-y border-neutral-800">
+  <section class="py-12 bg-neutral-100/60 dark:bg-neutral-950/60 border-y border-neutral-200 dark:border-neutral-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm">
         
         <div class="lg:col-span-5 space-y-4">
-          <span class="text-[10px] font-mono uppercase text-brand-red tracking-wider">Quick Recommendation</span>
-          <h2 class="font-serif text-2xl sm:text-3xl font-bold uppercase text-white">Find Your Ideal Oil Spec</h2>
-          <p class="text-xs text-neutral-400">
+          <span class="text-[10px] font-mono uppercase text-brand-red tracking-wider font-semibold">Quick Recommendation</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold uppercase text-brand-charcoal dark:text-white">Find Your Ideal Oil Spec</h2>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400">
             Select your driving habits and engine type to see our recommended oil blend and estimated price.
           </p>
 
           <div class="space-y-3 pt-2">
             <div>
-              <label class="block text-[11px] font-mono uppercase text-neutral-400 mb-1">Engine Type</label>
-              <select id="calcEngine" onchange="calculateOil()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-red">
+              <label class="block text-[11px] font-mono uppercase text-neutral-500 dark:text-neutral-400 mb-1">Engine Type</label>
+              <select id="calcEngine" onchange="calculateOil()" class="w-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-3.5 py-2.5 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red">
                 <option value="standard">Standard / Import Gas Engine</option>
                 <option value="euro">European High-Performance (BMW, Audi, Porsche)</option>
                 <option value="truck">Heavy-Duty Truck / SUV (V8 or Diesel)</option>
@@ -162,8 +242,8 @@
             </div>
 
             <div>
-              <label class="block text-[11px] font-mono uppercase text-neutral-400 mb-1">Driving Condition</label>
-              <select id="calcCondition" onchange="calculateOil()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-red">
+              <label class="block text-[11px] font-mono uppercase text-neutral-500 dark:text-neutral-400 mb-1">Driving Condition</label>
+              <select id="calcCondition" onchange="calculateOil()" class="w-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-3.5 py-2.5 text-xs text-brand-charcoal dark:text-white focus:outline-none focus:border-brand-red">
                 <option value="city">Daily City Driving & Commuting</option>
                 <option value="highway">High-Mileage / Highway</option>
                 <option value="track">Performance / Severe Duty</option>
@@ -172,38 +252,38 @@
           </div>
         </div>
 
-        <div class="lg:col-span-7 bg-neutral-900 border border-neutral-800 rounded-2xl p-6 sm:p-8 space-y-6">
-          <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+        <div class="lg:col-span-7 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 sm:p-8 space-y-6">
+          <div class="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-4">
             <div>
-              <span class="text-[10px] font-mono uppercase text-neutral-500">Recommended Service</span>
-              <h3 id="recTitle" class="font-serif text-xl font-bold uppercase text-white mt-0.5">Express Full Synthetic Swap</h3>
+              <span class="text-[10px] font-mono uppercase text-neutral-500 dark:text-neutral-400">Recommended Service</span>
+              <h3 id="recTitle" class="font-serif text-xl font-bold uppercase text-brand-charcoal dark:text-white mt-0.5">Express Full Synthetic Swap</h3>
             </div>
             <div class="text-right">
-              <span class="text-[10px] font-mono uppercase text-neutral-500 block">Starting At</span>
+              <span class="text-[10px] font-mono uppercase text-neutral-500 dark:text-neutral-400 block">Starting At</span>
               <span id="recPrice" class="font-serif text-2xl font-bold text-brand-red">$69.00</span>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div class="flex items-center gap-3">
-              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400 shrink-0"></i>
-              <span text-neutral-300 id="recOilType">5W-30 Full Synthetic API SP Spec</span>
+              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0"></i>
+              <span class="text-neutral-700 dark:text-neutral-300" id="recOilType">5W-30 Full Synthetic API SP Spec</span>
             </div>
             <div class="flex items-center gap-3">
               <i data-lucide="clock" class="w-5 h-5 text-brand-red shrink-0"></i>
-              <span text-neutral-300>15 to 20 Minute Express Bay Time</span>
+              <span class="text-neutral-700 dark:text-neutral-300">15 to 20 Minute Express Bay Time</span>
             </div>
             <div class="flex items-center gap-3">
-              <i data-lucide="filter" class="w-5 h-5 text-blue-400 shrink-0"></i>
-              <span text-neutral-300>OEM High-Efficiency Filter Replacement</span>
+              <i data-lucide="filter" class="w-5 h-5 text-blue-500 dark:text-blue-400 shrink-0"></i>
+              <span class="text-neutral-700 dark:text-neutral-300">OEM High-Efficiency Filter Replacement</span>
             </div>
             <div class="flex items-center gap-3">
-              <i data-lucide="check-circle-2" class="w-5 h-5 text-amber-400 shrink-0"></i>
-              <span text-neutral-300>Includes 12-Point Safety Fluid Inspection</span>
+              <i data-lucide="check-circle-2" class="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0"></i>
+              <span class="text-neutral-700 dark:text-neutral-300">Includes 12-Point Safety Fluid Inspection</span>
             </div>
           </div>
 
-          <a href="booking.html" class="block w-full text-center py-3 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
+          <a href="booking.html" class="block w-full text-center py-3 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
             Book Recommended Service
           </a>
         </div>
@@ -218,47 +298,47 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-[10px] font-mono uppercase text-brand-red tracking-widest">Transparent Pricing</span>
-        <h2 class="font-serif text-3xl sm:text-4xl font-extrabold uppercase text-white">Oil Service Tiers</h2>
-        <p class="text-neutral-400 text-xs sm:text-sm">No hidden shop fees. Every package comes with multi-point checks and fluid top-offs.</p>
+        <span class="text-[10px] font-mono uppercase text-brand-red tracking-widest font-semibold">Transparent Pricing</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-extrabold uppercase text-brand-charcoal dark:text-white">Oil Service Tiers</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm">No hidden shop fees. Every package comes with multi-point checks and fluid top-offs.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- TIER 1 -->
-        <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-neutral-700 transition-all">
+        <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-neutral-400 dark:hover:border-neutral-700 transition-all shadow-sm">
           <div class="space-y-4">
-            <span class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">Conventional / Blend</span>
-            <h3 class="font-serif text-2xl font-bold uppercase text-white">Synthetic Blend</h3>
-            <div class="font-serif text-3xl font-bold text-white">$49<span class="text-xs font-sans text-neutral-500">.00</span></div>
-            <p class="text-xs text-neutral-400">Great for standard commuting vehicles under 75,000 miles requiring standard protection.</p>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800">Conventional / Blend</span>
+            <h3 class="font-serif text-2xl font-bold uppercase text-brand-charcoal dark:text-white">Synthetic Blend</h3>
+            <div class="font-serif text-3xl font-bold text-brand-charcoal dark:text-white">$49<span class="text-xs font-sans text-neutral-500">.00</span></div>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400">Great for standard commuting vehicles under 75,000 miles requiring standard protection.</p>
             
-            <ul class="space-y-2.5 text-xs text-neutral-300 pt-4 border-t border-neutral-800">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Up to 5 Qts Synthetic Blend</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Premium Spin-On Filter</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Tire Pressure Check</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Washer Fluid Top-Off</li>
+            <ul class="space-y-2.5 text-xs text-neutral-700 dark:text-neutral-300 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> Up to 5 Qts Synthetic Blend</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> Premium Spin-On Filter</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> Tire Pressure Check</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> Washer Fluid Top-Off</li>
             </ul>
           </div>
 
-          <a href="booking.html" class="w-full py-3 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center block transition-all">
+          <a href="booking.html" class="w-full py-3 bg-neutral-100 dark:bg-neutral-900 hover:bg-brand-red hover:text-white dark:hover:bg-brand-red border border-neutral-200 dark:border-neutral-800 text-brand-charcoal dark:text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center block transition-all">
             Select Blend Package
           </a>
         </div>
 
         <!-- TIER 2 (FEATURED) -->
-        <div class="bg-brand-cardDark border-2 border-brand-red rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between relative shadow-2xl shadow-brand-red/10">
+        <div class="bg-white dark:bg-brand-cardDark border-2 border-brand-red rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between relative shadow-2xl shadow-brand-red/10">
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-red text-white text-[9px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full">
             Most Popular
           </div>
 
           <div class="space-y-4">
-            <span class="text-[10px] font-mono uppercase tracking-wider text-brand-red bg-brand-red/10 px-3 py-1 rounded-full border border-brand-red/20">Full Synthetic</span>
-            <h3 class="font-serif text-2xl font-bold uppercase text-white">Full Synthetic Pit</h3>
-            <div class="font-serif text-3xl font-bold text-white">$69<span class="text-xs font-sans text-neutral-500">.00</span></div>
-            <p class="text-xs text-neutral-400">Maximum thermal protection against friction, sludge, and heat breakdown.</p>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-brand-red bg-brand-red/10 px-3 py-1 rounded-full border border-brand-red/20 font-semibold">Full Synthetic</span>
+            <h3 class="font-serif text-2xl font-bold uppercase text-brand-charcoal dark:text-white">Full Synthetic Pit</h3>
+            <div class="font-serif text-3xl font-bold text-brand-charcoal dark:text-white">$69<span class="text-xs font-sans text-neutral-500">.00</span></div>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400">Maximum thermal protection against friction, sludge, and heat breakdown.</p>
             
-            <ul class="space-y-2.5 text-xs text-neutral-300 pt-4 border-t border-neutral-800">
+            <ul class="space-y-2.5 text-xs text-neutral-700 dark:text-neutral-300 pt-4 border-t border-neutral-200 dark:border-neutral-800">
               <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Up to 5 Qts Full Synthetic</li>
               <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Synthetic Filter Element</li>
               <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Express Bay Priority Access</li>
@@ -272,22 +352,22 @@
         </div>
 
         <!-- TIER 3 -->
-        <div class="bg-brand-cardDark border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-neutral-700 transition-all">
+        <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-neutral-400 dark:hover:border-neutral-700 transition-all shadow-sm">
           <div class="space-y-4">
-            <span class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800">OEM Euro Spec</span>
-            <h3 class="font-serif text-2xl font-bold uppercase text-white">Euro Protection</h3>
-            <div class="font-serif text-3xl font-bold text-white">$129<span class="text-xs font-sans text-neutral-500">.00</span></div>
-            <p class="text-xs text-neutral-400">Formulated specifically for BMW Longlife, Porsche A40, and Audi/VW approvals.</p>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800">OEM Euro Spec</span>
+            <h3 class="font-serif text-2xl font-bold uppercase text-brand-charcoal dark:text-white">Euro Protection</h3>
+            <div class="font-serif text-3xl font-bold text-brand-charcoal dark:text-white">$129<span class="text-xs font-sans text-neutral-500">.00</span></div>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400">Formulated specifically for BMW Longlife, Porsche A40, and Audi/VW approvals.</p>
             
-            <ul class="space-y-2.5 text-xs text-neutral-300 pt-4 border-t border-neutral-800">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Up to 7 Qts Approved Euro Oil</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> OEM Filter & O-Ring Swap</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Service Interval Computer Reset</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Full OBD-II Diagnostic Scan</li>
+            <ul class="space-y-2.5 text-xs text-neutral-700 dark:text-neutral-300 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> Up to 7 Qts Approved Euro Oil</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> OEM Filter & O-Ring Swap</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> Service Interval Computer Reset</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500 dark:text-emerald-400"></i> Full OBD-II Diagnostic Scan</li>
             </ul>
           </div>
 
-          <a href="booking.html" class="w-full py-3 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center block transition-all">
+          <a href="booking.html" class="w-full py-3 bg-neutral-100 dark:bg-neutral-900 hover:bg-brand-red hover:text-white dark:hover:bg-brand-red border border-neutral-200 dark:border-neutral-800 text-brand-charcoal dark:text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center block transition-all">
             Select Euro Package
           </a>
         </div>
@@ -298,19 +378,114 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-white dark:bg-black text-neutral-500 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800 py-8 text-xs mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-      <p>&copy; 2026 Apex Auto Care & Oil Change. All rights reserved.</p>
-      <div class="flex justify-center gap-6 text-neutral-400">
-        <a href="index.html" class="hover:text-white">Home</a>
-        <a href="services.html" class="hover:text-white">Services</a>
-        <a href="booking.html" class="hover:text-white">Book Now</a>
-        <a href="admin.html" class="hover:text-white">Admin Portal</a>
+  <footer class="bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-300 border-t border-neutral-200 dark:border-neutral-800 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Top 4-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12">
+        
+        <!-- Column 1: Brand & Socials -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-red text-white flex items-center justify-center rounded-lg font-bold shadow-lg shadow-brand-red/30">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-serif text-xl font-bold uppercase text-brand-charcoal dark:text-white tracking-wider">AutoCare</span>
+              <span class="text-[10px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold">Service Center</span>
+            </div>
+          </div>
+
+          <p class="text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+            Providing rapid oil changes, engine diagnostics, brake replacements, and full-service auto care. Timely service by certified mechanics.
+          </p>
+
+          <div class="flex items-center gap-3 pt-2">
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center text-neutral-700 dark:text-neutral-300 dark:hover:text-white dark:hover:border-brand-red transition-colors" aria-label="Instagram">
+              <svg class="w-4 h-4 fill-current text-neutral-700 dark:text-neutral-300" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center text-neutral-700 dark:text-neutral-300 dark:hover:text-white dark:hover:border-brand-red transition-colors" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current text-neutral-700 dark:text-neutral-300" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
+            </a>
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center text-neutral-700 dark:text-neutral-300 dark:hover:text-white dark:hover:border-brand-red transition-colors" aria-label="YouTube">
+              <svg class="w-4 h-4 fill-current text-neutral-700 dark:text-neutral-300" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+            <a href="javascript:void(0)" class="w-9 h-9 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center text-neutral-700 dark:text-neutral-300 dark:hover:text-white dark:hover:border-brand-red transition-colors" aria-label="Twitter">
+              <svg class="w-4 h-4 fill-current text-neutral-700 dark:text-neutral-300" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h3 class="font-serif text-base font-bold text-brand-charcoal dark:text-white mb-4 pb-2 border-b border-neutral-200 dark:border-neutral-800">Quick Links</h3>
+          <ul class="space-y-2 text-xs">
+            <li><a href="index.html" class="dark:hover:text-brand-red transition-colors">Home</a></li>
+            <li><a href="about.html" class="dark:hover:text-brand-red transition-colors">About Us</a></li>
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">Services</a></li>
+            <li><a href="express-bays.html" class="dark:hover:text-brand-red transition-colors">Express Bays</a></li>
+            <li><a href="contact.html" class="dark:hover:text-brand-red transition-colors">Contact Us</a></li>
+            <li><a href="coming-soon.html" class="dark:hover:text-brand-red transition-colors">Tuning Up for Launch</a></li>
+            <li><a href="404.html" class="dark:hover:text-brand-red transition-colors">Road Block Ahead</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Services & Offerings -->
+        <div>
+          <h3 class="font-serif text-base font-bold text-brand-charcoal dark:text-white mb-4 pb-2 border-b border-neutral-200 dark:border-neutral-800">Services & Offerings</h3>
+          <ul class="space-y-2 text-xs">
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">Express Oil Change</a></li>
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">Synthetic Lube & Filter</a></li>
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">Computer Engine Diagnostics</a></li>
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">Brake Pad Replacement</a></li>
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">Tire Balance & Rotation</a></li>
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">Battery Check & Change</a></li>
+            <li><a href="services.html" class="dark:hover:text-brand-red transition-colors">AC & Radiator Flush</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact -->
+        <div>
+          <h3 class="font-serif text-base font-bold text-brand-charcoal dark:text-white mb-4 pb-2 border-b border-neutral-200 dark:border-neutral-800">Studio Contact</h3>
+          <ul class="space-y-3 text-xs">
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-brand-red shrink-0 mt-0.5"></i>
+              <span>123 Creative Avenue, Hyderabad, India</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-brand-red shrink-0"></i>
+              <a href="tel:+919876543210" class="dark:hover:text-white">+91 98765 43210</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-brand-red shrink-0"></i>
+              <a href="mailto:hello@apexautocare.com" class="dark:hover:text-white">hello@apexautocare.com</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="clock" class="w-4 h-4 text-brand-red shrink-0 mt-0.5"></i>
+              <div>
+                <p>Mon - Sat</p>
+                <p class="font-bold text-brand-charcoal dark:text-white">9:00 AM - 7:00 PM</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
       </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-600 dark:text-neutral-400">
+        <div>
+          &copy; 2026 Developed by Abhivorn Technologies Pvt. Ltd.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="privacy.html" class="dark:hover:text-brand-red">Privacy Policy</a>
+          <a href="terms.html" class="dark:hover:text-brand-red">Terms of Services</a>
+        </div>
+      </div>
+
     </div>
   </footer>
 
-  <!-- SCRIPT -->
   <script src="../assets/js/main.js"></script>
 </body>
 </html>
