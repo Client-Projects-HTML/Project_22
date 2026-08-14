@@ -226,6 +226,23 @@ describe('ApexScripts Template Logic', () => {
     expect(pdfBtn.classList.contains('bg-brand-red')).toBeTruthy();
   });
 
+  test('toggleDashboardSidebar toggles translate-x-full and overlay visibility', () => {
+    document.body.innerHTML += `
+      <div id="dashboard-overlay" class="hidden"></div>
+      <aside id="dashboard-sidebar" class="translate-x-full"></aside>
+    `;
+    const sidebar = document.getElementById('dashboard-sidebar');
+    const overlay = document.getElementById('dashboard-overlay');
+
+    ApexScripts.toggleDashboardSidebar();
+    expect(sidebar.classList.contains('translate-x-full')).toBeFalsy();
+    expect(overlay.classList.contains('hidden')).toBeFalsy();
+
+    ApexScripts.toggleDashboardSidebar();
+    expect(sidebar.classList.contains('translate-x-full')).toBeTruthy();
+    expect(overlay.classList.contains('hidden')).toBeTruthy();
+  });
+
 });
 
 

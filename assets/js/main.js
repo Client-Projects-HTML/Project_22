@@ -102,6 +102,20 @@ ApexScripts.closeMenu = () => {
   }
 };
 
+ApexScripts.toggleDashboardSidebar = () => {
+  const sidebar = document.getElementById('dashboard-sidebar');
+  const overlay = document.getElementById('dashboard-overlay');
+  if (sidebar && overlay) {
+    if (sidebar.classList.contains('translate-x-full')) {
+      sidebar.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+    } else {
+      sidebar.classList.add('translate-x-full');
+      overlay.classList.add('hidden');
+    }
+  }
+};
+
 ApexScripts.filterGallery = (filter, button, buttonsClass, itemsClass, activeClasses, inactiveClasses) => {
   document.querySelectorAll('.' + buttonsClass).forEach(btn => {
     btn.classList.remove(...activeClasses);
@@ -126,7 +140,7 @@ ApexScripts.showToast = (message, type = 'success') => {
   if (!toast) {
     toast = document.createElement('div');
     toast.id = 'dashboardToast';
-    toast.className = 'fixed bottom-5 right-5 z-50 px-5 py-3.5 rounded-2xl bg-brand-charcoal text-white dark:bg-white dark:text-brand-charcoal shadow-2xl flex items-center gap-3 text-xs font-bold transition-all transform translate-y-10 opacity-0 pointer-events-none';
+    toast.className = 'fixed bottom-5 right-5 rtl:right-auto rtl:left-5 z-[70] px-5 py-3.5 rounded-2xl bg-brand-charcoal text-white dark:bg-white dark:text-brand-charcoal shadow-2xl flex items-center gap-3 text-xs font-bold transition-all transform translate-y-10 opacity-0 pointer-events-none';
     document.body.appendChild(toast);
   }
   toast.innerHTML = `<span class="w-2.5 h-2.5 rounded-full ${type === 'success' ? 'bg-emerald-500' : 'bg-brand-red'} animate-ping"></span> ${message}`;
@@ -481,6 +495,7 @@ if (typeof module !== 'undefined' && module.exports) {
 if (typeof window !== 'undefined') {
   window.ApexScripts = ApexScripts;
   window.toggleDirectionRTL = ApexScripts.toggleRTL;
+  window.toggleDashboardSidebar = ApexScripts.toggleDashboardSidebar;
   window.toggleNotificationsMenu = ApexScripts.toggleNotifications;
   window.clearNotifications = ApexScripts.clearNotifications;
   window.dismissNotification = ApexScripts.dismissNotification;

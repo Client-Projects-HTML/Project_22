@@ -17,7 +17,13 @@
   left: -0.25rem !important;
 }
 
-/* Flip sidebar border and transition in RTL */
+/* Position toast notifications on the left in RTL mode to prevent overlapping with right sidebar */
+[dir="rtl"] #dashboardToast {
+  right: auto !important;
+  left: 1.25rem !important;
+}
+
+/* Flip sidebar position, border and header alignment in RTL */
 [dir="rtl"] #dashboard-sidebar {
   border-right-width: 0 !important;
   border-left-width: 1px !important;
@@ -28,9 +34,54 @@
 }
 
 @media (min-width: 768px) {
+  [dir="rtl"] #dashboard-sidebar {
+    left: auto !important;
+    right: 0 !important;
+  }
+
   [dir="rtl"] #dashboard-sidebar.md\:translate-x-0 {
     transform: translateX(0) !important;
   }
+
+  /* Adjust fixed header position on desktop in RTL mode */
+  [dir="rtl"] header.fixed,
+  [dir="rtl"] #portalHeader {
+    left: 0 !important;
+    right: 16rem !important;
+  }
+}
+
+/* Public pages mobile drawer in RTL */
+[dir="rtl"] #mobile-menu-drawer {
+  right: auto !important;
+  left: 0 !important;
+  border-right-width: 1px !important;
+  border-left-width: 0 !important;
+}
+
+/* Keep logo icon on the leading edge of brand text in RTL mode */
+[dir="rtl"] header a.shrink-0,
+[dir="rtl"] header a.group {
+  flex-direction: row;
+}
+
+/* Keep dropdown chevron on the trailing edge of nav item text in RTL mode */
+[dir="rtl"] nav button.inline-flex {
+  flex-direction: row-reverse;
+}
+
+/* Align desktop navigation dropdowns in RTL mode */
+[dir="rtl"] nav .relative > div.absolute {
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* Align mobile dropdown submenus in RTL mode */
+[dir="rtl"] .mobile-dropdown .border-l-2 {
+  border-left-width: 0 !important;
+  border-right-width: 2px !important;
+  padding-left: 0 !important;
+  padding-right: 1rem !important;
 }
 
 /* Mirror directional Lucide icons in RTL mode */
@@ -51,4 +102,4 @@
 [dir="rtl"] table th.text-right,
 [dir="rtl"] table td.text-right {
   text-align: left !important;
-}
+}

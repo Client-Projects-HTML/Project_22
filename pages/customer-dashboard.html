@@ -122,8 +122,12 @@
 
       <!-- MAIN PORTAL CONTAINER -->
       <div class="flex-1 flex flex-col min-w-0 min-h-screen">
-        <header class="h-16 sm:h-20 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-brand-charcoal/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between fixed top-0 left-0 right-0 md:left-64 z-40 shadow-sm">
-          <div class="flex items-center min-w-0">
+        <header id="portalHeader" class="h-16 sm:h-20 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-brand-charcoal/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between fixed top-0 left-0 right-0 md:left-64 z-40 shadow-sm transition-all duration-300">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <!-- Mobile Sidebar Toggle Button -->
+            <button type="button" id="dashboard-menu-btn" onclick="toggleDashboardSidebar()" class="md:hidden w-8 h-8 sm:w-9 sm:h-9 border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-xl flex items-center justify-center transition-colors shrink-0" title="Toggle Navigation Menu">
+              <i data-lucide="menu" class="w-4 h-4"></i>
+            </button>
             <h2 id="portalHeaderTitle" class="font-serif text-xs sm:text-lg md:text-2xl font-bold uppercase text-brand-charcoal dark:text-white tracking-wide truncate">Customer Portal</h2>
           </div>
 
@@ -471,7 +475,7 @@
   <!-- =================================================================== -->
   <!-- RESCHEDULE APPOINTMENT MODAL                                        -->
   <!-- =================================================================== -->
-  <div id="rescheduleModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+  <div id="rescheduleModal" class="fixed inset-0 bg-black/75 z-[80] hidden items-center justify-center p-4 backdrop-blur-md transition-all">
     <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl relative">
       <button type="button" onclick="closeRescheduleModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -519,7 +523,7 @@
   <!-- =================================================================== -->
   <!-- VIEW PDF INVOICE MODAL                                             -->
   <!-- =================================================================== -->
-  <div id="viewPdfModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+  <div id="viewPdfModal" class="fixed inset-0 bg-black/75 z-[80] hidden items-center justify-center p-4 backdrop-blur-md transition-all">
     <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-xl shadow-2xl relative max-h-[90vh] overflow-y-auto">
       <button type="button" onclick="closePdfModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -592,7 +596,7 @@
   <!-- =================================================================== -->
   <!-- INVOICES SUMMARY EXPORT MODAL                                      -->
   <!-- =================================================================== -->
-  <div id="invoicesExportModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+  <div id="invoicesExportModal" class="fixed inset-0 bg-black/75 z-[80] hidden items-center justify-center p-4 backdrop-blur-md transition-all">
     <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl relative">
       <button type="button" onclick="closeInvoicesModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -643,7 +647,7 @@
   <!-- =================================================================== -->
   <!-- ADD NEW VEHICLE MODAL                                              -->
   <!-- =================================================================== -->
-  <div id="addVehicleModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all">
+  <div id="addVehicleModal" class="fixed inset-0 bg-black/75 z-[80] hidden items-center justify-center p-4 backdrop-blur-md transition-all">
     <div class="bg-white dark:bg-brand-cardDark border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl relative">
       <button type="button" onclick="closeAddVehicleModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-brand-charcoal dark:hover:text-white p-1 transition-colors">
         <i data-lucide="x" class="w-5 h-5"></i>
